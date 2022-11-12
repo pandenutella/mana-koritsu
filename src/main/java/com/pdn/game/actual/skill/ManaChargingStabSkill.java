@@ -4,11 +4,13 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.unit.Unit;
 
-public class ManaStabSkill extends Skill {
+public class ManaChargingStabSkill extends Skill {
 
     private final SkillMissileManager skillMissileManager;
 
-    public ManaStabSkill(Unit unit, SkillMissileManager skillMissileManager) {
+    private Direction missileDirection;
+
+    public ManaChargingStabSkill(Unit unit, SkillMissileManager skillMissileManager) {
         super(unit);
 
         this.skillMissileManager = skillMissileManager;
@@ -16,6 +18,8 @@ public class ManaStabSkill extends Skill {
 
     @Override
     protected void startEffect() {
+        unit.pause();
+
         double x = unit.getLocation().getX() + (double) (unit.getSize() / 2) - (double) (40 / 2);
         double y = unit.getLocation().getY() + (double) (unit.getSize() / 2) - (double) (40 / 2);
 
@@ -37,16 +41,23 @@ public class ManaStabSkill extends Skill {
             else if (missileDirectionOrdinal > 3)
                 missileDirectionOrdinal -= 4;
         }
+        missileDirection = Direction.values()[missileDirectionOrdinal];
 
-        Direction missileDirection = Direction.values()[missileDirectionOrdinal];
-
-        skillMissileManager.add(new ManaStabMissile(unit, new Location(x, y), missileDirection));
-
-        endEffect();
+        skillMissileManager.add(new ManaChargingStabMissile(unit, new Location(x, y), missileDirection));
     }
+
+    private double effectCounter = 0;
 
     @Override
     public void update(double deltaTime) {
+        unit.getLocation().adjustTowardsDirection(1.2 * deltaTime, missileDirection);
+        effectCounter += deltaTime;
 
+        if (effectCounter > 275) {
+            effectCounter = 0;
+
+            unit.unpause();
+            endEffect();
+        }
     }
 }

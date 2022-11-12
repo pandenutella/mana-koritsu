@@ -8,14 +8,14 @@ import com.pdn.game.actual.unit.Unit;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class ManaStabMissile extends SkillMissile {
+public class ManaChargingStabMissile extends SkillMissile {
     private final FootMarkSpawner footMarkSpawner;
 
-    public ManaStabMissile(Unit user, Location location, Direction direction) {
-        super(user, location, direction, 1500, 150);
+    public ManaChargingStabMissile(Unit user, Location location, Direction direction) {
+        super(user, location, direction, 1200, 350);
 
         Color color = new Color(206, 150, 150);
-        footMarkSpawner = new FootMarkSpawner(this, color, 30, 0, 10, 800, 5);
+        footMarkSpawner = new FootMarkSpawner(this, color, 40, 0, 20, 800, 10);
     }
 
     @Override

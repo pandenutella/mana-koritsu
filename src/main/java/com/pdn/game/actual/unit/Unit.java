@@ -7,7 +7,7 @@ import com.pdn.game.actual.effect.FootMarkSpawner;
 import com.pdn.game.actual.skill.ManaBlastSkill;
 import com.pdn.game.actual.skill.ManaBlockSkill;
 import com.pdn.game.actual.skill.ManaBurstSkill;
-import com.pdn.game.actual.skill.ManaStabSkill;
+import com.pdn.game.actual.skill.ManaChargingStabSkill;
 import com.pdn.game.actual.skill.Skill;
 import com.pdn.game.actual.skill.SkillManager;
 import com.pdn.game.actual.skill.SkillMissileManager;
@@ -35,6 +35,7 @@ public class Unit implements Entity {
     private Direction peekDirection;
     private boolean moving;
     private double moveSpeed = 300;
+    private boolean paused = false;
 
     public Unit(String name, Location location, SkillMissileManager skillMissileManager) {
         this.name = name;
@@ -44,15 +45,15 @@ public class Unit implements Entity {
         moveDirection = UP;
 
         Map<Integer, Skill> swordSkillTierMap = new HashMap<>();
-        swordSkillTierMap.put(1, new ManaStabSkill(this, skillMissileManager));
-        swordSkillTierMap.put(2, new ManaStabSkill(this, skillMissileManager));
-        swordSkillTierMap.put(3, new ManaStabSkill(this, skillMissileManager));
+        swordSkillTierMap.put(1, new ManaChargingStabSkill(this, skillMissileManager));
+        swordSkillTierMap.put(2, new ManaChargingStabSkill(this, skillMissileManager));
+        swordSkillTierMap.put(3, new ManaChargingStabSkill(this, skillMissileManager));
 
         SkillSet swordSkillSet = new SkillSet(swordSkillTierMap);
 
         Map<Integer, Skill> sphereSkillTierMap = new HashMap<>();
         sphereSkillTierMap.put(1, new ManaBurstSkill(this, skillMissileManager));
-        sphereSkillTierMap.put(2, new ManaBlastSkill(this, skillMissileManager));
+        sphereSkillTierMap.put(2, new ManaBurstSkill(this, skillMissileManager));
         sphereSkillTierMap.put(3, new ManaBlastSkill(this, skillMissileManager));
 
         SkillSet sphereSkillSet = new SkillSet(sphereSkillTierMap);
@@ -76,6 +77,9 @@ public class Unit implements Entity {
     }
 
     public void moveTowards(Direction direction) {
+        if (paused)
+            return;
+
         this.moveDirection = direction;
         moving = true;
     }
@@ -85,6 +89,9 @@ public class Unit implements Entity {
     }
 
     public void useSkill(String skillName) {
+        if (paused)
+            return;
+
         skillManager.useSkill(skillName);
     }
 
@@ -96,8 +103,16 @@ public class Unit implements Entity {
         peekDirection = null;
     }
 
+    public void pause() {
+        paused = true;
+    }
+
+    public void unpause() {
+        paused = false;
+    }
+
     public void update(double deltaTime) {
-        if (moving) {
+        if (!paused && moving) {
             double distance = moveSpeed * (deltaTime / 1000);
 
             location.adjustTowardsDirection(distance, moveDirection);
@@ -112,7 +127,6 @@ public class Unit implements Entity {
 
         graphics.setColor(WHITE);
         graphics.fillRect((int) (screenLocation.getX() + location.getX()), (int) (screenLocation.getY() + location.getY()), size, size);
-
     }
 
     public String getName() {
