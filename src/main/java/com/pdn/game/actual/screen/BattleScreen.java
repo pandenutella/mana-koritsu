@@ -1,13 +1,17 @@
 package com.pdn.game.actual.screen;
 
 import com.pdn.game.actual.camera.Camera;
+import com.pdn.game.actual.camera.FocusedCamera;
 import com.pdn.game.actual.common.Location;
+import com.pdn.game.actual.controller.EnemyController;
+import com.pdn.game.actual.controller.PlayerController;
 import com.pdn.game.actual.unit.Unit;
 import com.pdn.game.actual.unit.UnitController;
-import com.pdn.game.actual.camera.FocusedCamera;
 import com.pdn.game.engine.ui.Screen;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
 import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
@@ -15,18 +19,21 @@ import static java.awt.Color.BLACK;
 
 public class BattleScreen implements Screen {
 
-    private final Unit player;
-    private final UnitController playerController;
     private final Camera camera;
-
     private final Location screenLocation = new Location(0, 0);
 
-    public BattleScreen() {
-        String playerName = "Mk";
-        Location playerLocation = new Location(100, 100);
+    private final List<Unit> unitList = new ArrayList<>();
+    private final List<UnitController> unitControllerList = new ArrayList<>();
 
-        player = new Unit(playerName, playerLocation);
-        playerController = new UnitController(player);
+    public BattleScreen() {
+        Unit player = new Unit("Mk", new Location(100, 325));
+        unitList.add(player);
+        unitControllerList.add(new PlayerController(player));
+
+        Unit enemy = new Unit("eMk", new Location(850, 325));
+        unitList.add(enemy);
+        unitControllerList.add(new EnemyController(enemy));
+
         camera = new FocusedCamera(screenLocation, player);
     }
 
@@ -35,8 +42,8 @@ public class BattleScreen implements Screen {
         if (getGlobalKeyManager().isKeyPressed("back"))
             getGlobalScreenManager().goTo("home");
 
-        playerController.update();
-        player.update(deltaTime);
+        unitControllerList.forEach(unitController -> unitController.update(deltaTime));
+        unitList.forEach(unit -> unit.update(deltaTime));
 
         camera.update(deltaTime);
     }
@@ -47,6 +54,6 @@ public class BattleScreen implements Screen {
         graphics.drawString("Battle", 30, 30);
         graphics.drawString("Press [ESCAPE] to go back", 30, 45);
 
-        player.render(graphics, screenLocation);
+        unitList.forEach(unit -> unit.render(graphics, screenLocation));
     }
 }
