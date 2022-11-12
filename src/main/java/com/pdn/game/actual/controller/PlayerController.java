@@ -15,8 +15,12 @@ public class PlayerController extends UnitController {
 
     @Override
     public void update(double deltaTime) {
-        String latestPressedMove = getGlobalKeyManager().getLatestPressedKey("move-");
+        checkMovementInputs();
+        checkSkillInputs();
+    }
 
+    private void checkMovementInputs() {
+        String latestPressedMove = getGlobalKeyManager().getLatestPressedKey("move-");
         if (latestPressedMove == null) {
             if (unit.isMoving())
                 unit.stop();
@@ -25,7 +29,14 @@ public class PlayerController extends UnitController {
         }
 
         Direction direction = Direction.valueOf(latestPressedMove.substring(5).toUpperCase(Locale.ENGLISH));
-
         unit.moveTowards(direction);
+    }
+
+    private void checkSkillInputs() {
+        String latestPressedSkill = getGlobalKeyManager().getLatestPressedKey("skill-");
+        if (latestPressedSkill == null)
+            return;
+
+        unit.useSkill();
     }
 }

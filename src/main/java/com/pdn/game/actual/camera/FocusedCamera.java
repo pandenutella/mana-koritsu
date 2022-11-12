@@ -15,8 +15,8 @@ public class FocusedCamera extends Camera {
 
     @Override
     public void update(double deltaTime) {
-        double targetX = -unit.getLocation().getX() + 500 - (double) (Unit.SIZE / 2);
-        double targetY = -unit.getLocation().getY() + 350 - (double) (Unit.SIZE / 2);
+        double targetX = -unit.getLocation().getX() + 500 - (double) (unit.getSize() / 2);
+        double targetY = -unit.getLocation().getY() + 350 - (double) (unit.getSize() / 2);
 
         double diffX = targetX - screenLocation.getX();
         double diffY = targetY - screenLocation.getY();
