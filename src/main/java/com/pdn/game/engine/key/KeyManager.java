@@ -1,7 +1,5 @@
 package com.pdn.game.engine.key;
 
-import com.pdn.game.engine.key.KeyPress;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
@@ -28,6 +26,14 @@ public class KeyManager {
                 .map(KeyPress::getName)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public boolean isKeyPressed(String name) {
+        KeyPress keyPress = keyPressMap.get(name);
+        if (keyPress == null)
+            return false;
+
+        return keyPress.isPressed();
     }
 
     public KeyManagerListener getListener() {

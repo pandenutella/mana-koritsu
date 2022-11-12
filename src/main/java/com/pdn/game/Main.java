@@ -1,8 +1,10 @@
 package com.pdn.game;
 
+import com.pdn.game.actual.MkScreenFactory;
 import com.pdn.game.engine.Game;
 import com.pdn.game.engine.key.KeyManager;
 import com.pdn.game.engine.ui.Painter;
+import com.pdn.game.engine.ui.ScreenManager;
 import com.pdn.game.engine.ui.Window;
 
 import java.awt.event.KeyEvent;
@@ -26,7 +28,16 @@ public class Main {
         window.setPainter(painter);
         window.setKeyManager(keyManager);
 
+        MkScreenFactory screenFactory = new MkScreenFactory();
+        screenFactory.setKeyManager(keyManager);
+
+        ScreenManager screenManager = new ScreenManager(screenFactory);
+        screenFactory.setScreenManager(screenManager);
+
+        screenManager.goTo("home");
+
         game.setWindow(window);
+        game.setScreenManager(screenManager);
         game.start();
     }
 }
