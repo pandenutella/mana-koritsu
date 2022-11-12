@@ -8,21 +8,34 @@ import java.util.Map;
 import static java.util.Comparator.comparingDouble;
 
 public class KeyManager {
+    private static KeyManager INSTANCE;
+
     protected final Map<String, KeyPress> keyPressMap;
     private final KeyManagerListener listener;
 
-    public KeyManager(Map<Integer, String> keyCodeNameMap) {
+    private KeyManager(Map<Integer, String> keyCodeNameMap) {
         keyPressMap = new HashMap<>();
         keyCodeNameMap.forEach((code, name) -> keyPressMap.put(name, new KeyPress(name)));
 
         listener = new KeyManagerListener(keyCodeNameMap, keyPressMap);
     }
 
+    public static void initialize(Map<Integer, String> keyCodeNameMap) {
+        if (INSTANCE != null)
+            return;
+
+        INSTANCE = new KeyManager(keyCodeNameMap);
+    }
+
+    public static KeyManager getGlobalKeyManager() {
+        return INSTANCE;
+    }
+
     public String getLatestPressedKey(String partialName) {
         return keyPressMap.values().stream()
                 .filter(KeyPress::isPressed)
                 .filter(keyPress -> keyPress.getName().contains(partialName))
-                .sorted(comparingDouble(KeyPress::getLastInteraction))
+                .sorted(comparingDouble(KeyPress::getLastInteraction).reversed())
                 .map(KeyPress::getName)
                 .findFirst()
                 .orElse(null);

@@ -1,13 +1,13 @@
 package com.pdn.game.engine;
 
-import com.pdn.game.engine.ui.ScreenManager;
 import com.pdn.game.engine.ui.Window;
 
 import java.awt.Graphics;
 
+import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
+
 public class Game {
     private Window window;
-    private ScreenManager screenManager;
 
     public void start() {
         window.display();
@@ -33,18 +33,14 @@ public class Game {
     }
 
     public void update(double deltaTime) {
-        screenManager.getScreen().update(deltaTime);
+        getGlobalScreenManager().getScreen().update(deltaTime);
     }
 
     public void render(Graphics graphics) {
-        screenManager.getScreen().render(graphics);
+        getGlobalScreenManager().getScreen().render(graphics);
     }
 
     public void setWindow(Window window) {
         this.window = window;
-    }
-
-    public void setScreenManager(ScreenManager screenManager) {
-        this.screenManager = screenManager;
     }
 }

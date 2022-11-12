@@ -7,9 +7,17 @@ import com.pdn.game.engine.ui.Painter;
 import com.pdn.game.engine.ui.ScreenManager;
 import com.pdn.game.engine.ui.Window;
 
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
+import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
+import static java.awt.event.KeyEvent.VK_A;
+import static java.awt.event.KeyEvent.VK_D;
+import static java.awt.event.KeyEvent.VK_ESCAPE;
+import static java.awt.event.KeyEvent.VK_S;
+import static java.awt.event.KeyEvent.VK_SPACE;
+import static java.awt.event.KeyEvent.VK_W;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,25 +27,23 @@ public class Main {
         painter.setGame(game);
 
         Map<Integer, String> keyCodeNameMap = new HashMap<>();
-        keyCodeNameMap.put(KeyEvent.VK_SPACE, "next");
-        keyCodeNameMap.put(KeyEvent.VK_ESCAPE, "back");
+        keyCodeNameMap.put(VK_SPACE, "next");
+        keyCodeNameMap.put(VK_ESCAPE, "back");
+        keyCodeNameMap.put(VK_W, "move-up");
+        keyCodeNameMap.put(VK_D, "move-right");
+        keyCodeNameMap.put(VK_S, "move-down");
+        keyCodeNameMap.put(VK_A, "move-left");
 
-        KeyManager keyManager = new KeyManager(keyCodeNameMap);
+        KeyManager.initialize(keyCodeNameMap);
 
         Window window = new Window("mana koritsu by pandenutella");
         window.setPainter(painter);
-        window.setKeyManager(keyManager);
+        window.setKeyManager(getGlobalKeyManager());
 
-        MkScreenFactory screenFactory = new MkScreenFactory();
-        screenFactory.setKeyManager(keyManager);
-
-        ScreenManager screenManager = new ScreenManager(screenFactory);
-        screenFactory.setScreenManager(screenManager);
-
-        screenManager.goTo("home");
+        ScreenManager.initialize(new MkScreenFactory());
+        getGlobalScreenManager().goTo("home");
 
         game.setWindow(window);
-        game.setScreenManager(screenManager);
         game.start();
     }
 }

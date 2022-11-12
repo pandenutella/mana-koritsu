@@ -1,23 +1,19 @@
 package com.pdn.game.actual.screen;
 
-import com.pdn.game.engine.key.KeyManager;
 import com.pdn.game.engine.ui.Screen;
-import com.pdn.game.engine.ui.ScreenManager;
 
 import java.awt.Graphics;
 
+import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
+import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
 import static java.awt.Color.BLACK;
 
-public class HomeScreen extends Screen {
-
-    public HomeScreen(ScreenManager screenManager, KeyManager keyManager) {
-        super(screenManager, keyManager);
-    }
+public class HomeScreen implements Screen {
 
     @Override
     public void update(double deltaTime) {
-        if (keyManager.isKeyPressed("next"))
-            screenManager.goTo("battle");
+        if (getGlobalKeyManager().isKeyPressed("next"))
+            getGlobalScreenManager().goTo("battle");
     }
 
     @Override
