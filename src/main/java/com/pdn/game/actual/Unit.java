@@ -6,18 +6,24 @@ import static com.pdn.game.actual.Direction.UP;
 import static java.awt.Color.BLACK;
 
 public class Unit {
+    public static final int SIZE = 50;
+
     private final String name;
     private final Location location;
 
     private Direction direction;
     private boolean moving;
-    private double moveSpeed = 200;
+    private double moveSpeed = 300;
+
+    private final UnitFootMarkManager unitFootMarkManager;
 
     public Unit(String name, Location location) {
         this.name = name;
         this.location = location;
 
         direction = UP;
+
+        unitFootMarkManager = new UnitFootMarkManager(this);
     }
 
     public void moveTowards(Direction direction) {
@@ -35,11 +41,15 @@ public class Unit {
 
             location.adjustTowardsDirection(distance, direction);
         }
+
+        unitFootMarkManager.update(deltaTime);
     }
 
     public void render(Graphics graphics) {
         graphics.setColor(BLACK);
-        graphics.fillRect((int) location.getX(), (int) location.getY(), 50, 50);
+        graphics.fillRect((int) location.getX(), (int) location.getY(), SIZE, SIZE);
+
+        unitFootMarkManager.render(graphics);
     }
 
     public String getName() {
