@@ -3,24 +3,25 @@ package com.pdn.game.actual.skill;
 import java.util.Map;
 
 public class SkillManager {
-    private final Map<String, Skill> skillMap;
+    private final Map<String, SkillSet> skillSetMap;
 
-    public SkillManager(Map<String, Skill> skillMap) {
-        this.skillMap = skillMap;
+    public SkillManager(Map<String, SkillSet> skillSetMap) {
+        this.skillSetMap = skillSetMap;
     }
 
     public void useSkill(String name) {
-        Skill skill = skillMap.get(name);
-        if (skill == null)
+        SkillSet skillSet = skillSetMap.get(name);
+        if (skillSet == null)
             return;
 
-        if (skill.isOnCoolDown())
-            return;
-
-        skill.use();
+        skillSet.useSkill();
     }
 
     public void update(double deltaTime) {
-        skillMap.forEach((name, skill) -> skill.update(deltaTime));
+        skillSetMap.forEach((name, skillSet) -> skillSet.update(deltaTime));
+    }
+
+    public Map<String, SkillSet> getSkillSetMap() {
+        return skillSetMap;
     }
 }

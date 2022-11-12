@@ -5,9 +5,11 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
 import com.pdn.game.actual.skill.ManaBlastSkill;
+import com.pdn.game.actual.skill.ManaBurstSkill;
 import com.pdn.game.actual.skill.Skill;
 import com.pdn.game.actual.skill.SkillManager;
 import com.pdn.game.actual.skill.SkillMissileManager;
+import com.pdn.game.actual.skill.SkillSet;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -39,8 +41,15 @@ public class Unit implements Entity {
 
         moveDirection = UP;
 
-        Map<String, Skill> skillMap = new HashMap<>();
-        skillMap.put("skill-sphere", new ManaBlastSkill(this, skillMissileManager));
+        Map<Integer, Skill> sphereSkillTierMap = new HashMap<>();
+        sphereSkillTierMap.put(1, new ManaBurstSkill(this, skillMissileManager));
+        sphereSkillTierMap.put(2, new ManaBlastSkill(this, skillMissileManager));
+        sphereSkillTierMap.put(3, new ManaBlastSkill(this, skillMissileManager));
+
+        SkillSet sphereSkillSet = new SkillSet(sphereSkillTierMap);
+
+        Map<String, SkillSet> skillMap = new HashMap<>();
+        skillMap.put("skill-sphere", sphereSkillSet);
 
         skillManager = new SkillManager(skillMap);
 
@@ -114,5 +123,9 @@ public class Unit implements Entity {
 
     public Direction getPeekDirection() {
         return peekDirection;
+    }
+
+    public SkillManager getSkillManager() {
+        return skillManager;
     }
 }

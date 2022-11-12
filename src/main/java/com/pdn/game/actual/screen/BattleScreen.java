@@ -6,10 +6,12 @@ import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.controller.EnemyController;
 import com.pdn.game.actual.controller.PlayerController;
 import com.pdn.game.actual.skill.SkillMissileManager;
+import com.pdn.game.actual.skill.SkillSet;
 import com.pdn.game.actual.unit.Unit;
 import com.pdn.game.actual.unit.UnitController;
 import com.pdn.game.engine.ui.Screen;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +25,17 @@ public class BattleScreen implements Screen {
     private final Camera camera;
     private final Location screenLocation = new Location(0, 0);
 
+    private final Unit player;
+
     private final List<Unit> unitList = new ArrayList<>();
     private final List<UnitController> unitControllerList = new ArrayList<>();
 
     private final SkillMissileManager skillMissileManager = new SkillMissileManager();
 
+    private static final int SCREEN_HEIGHT = 653;
+
     public BattleScreen() {
-        Unit player = new Unit("Mk", new Location(100, 325), skillMissileManager);
+        player = new Unit("Mk", new Location(100, 325), skillMissileManager);
         unitList.add(player);
         unitControllerList.add(new PlayerController(player));
 
@@ -60,11 +66,32 @@ public class BattleScreen implements Screen {
 
     @Override
     public void render(Graphics graphics) {
+        unitList.forEach(unit -> unit.render(graphics, screenLocation));
+        skillMissileManager.render(graphics, screenLocation);
+
+        Color sphereColor = new Color(150, 192, 206);
+        SkillSet sphereSkillSet = player.getSkillManager().getSkillSetMap().get("skill-sphere");
+        renderSkillSet(graphics, 1, sphereColor, sphereSkillSet.getTier(), sphereSkillSet.getTierCurrent());
+
         graphics.setColor(WHITE);
         graphics.drawString("Battle", 30, 30);
         graphics.drawString("Press [ESCAPE] to go back", 30, 45);
+    }
 
-        unitList.forEach(unit -> unit.render(graphics, screenLocation));
-        skillMissileManager.render(graphics, screenLocation);
+    private void renderSkillSet(Graphics graphics, int setCount, Color color, int tier, int tierCurrent) {
+        int pointWidth = 30;
+        int pointHeight = 10;
+
+        int gaugeWidth = pointWidth + 3;
+        int gaugeHeight = (pointHeight * tier) + (tier + 2);
+
+        int gaugeX = 10;
+        int gaugeY = SCREEN_HEIGHT - 10 - gaugeHeight;
+
+        graphics.setColor(color);
+        graphics.drawRect(gaugeX, gaugeY, gaugeWidth, gaugeHeight);
+
+        for (int i = 0; i < tierCurrent; i++)
+            graphics.fillRect(gaugeX + 2, SCREEN_HEIGHT - 10 - ((pointHeight + 1) * (i + 1)), pointWidth, pointHeight);
     }
 }

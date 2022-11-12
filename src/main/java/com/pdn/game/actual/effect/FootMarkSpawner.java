@@ -77,7 +77,7 @@ public class FootMarkSpawner {
     public void render(Graphics graphics, Location screenLocation) {
         try {
             footMarkList.forEach(footMark -> footMark.render(graphics, screenLocation));
-        } catch (ConcurrentModificationException ignored) {
+        } catch (ConcurrentModificationException | NullPointerException ignored) {
         }
     }
 }
