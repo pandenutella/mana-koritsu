@@ -16,7 +16,9 @@ import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_D;
 import static java.awt.event.KeyEvent.VK_E;
 import static java.awt.event.KeyEvent.VK_ESCAPE;
+import static java.awt.event.KeyEvent.VK_J;
 import static java.awt.event.KeyEvent.VK_K;
+import static java.awt.event.KeyEvent.VK_L;
 import static java.awt.event.KeyEvent.VK_Q;
 import static java.awt.event.KeyEvent.VK_S;
 import static java.awt.event.KeyEvent.VK_SPACE;
@@ -38,7 +40,9 @@ public class Main {
         keyCodeNameMap.put(VK_A, "move-left");
         keyCodeNameMap.put(VK_Q, "peek-left");
         keyCodeNameMap.put(VK_E, "peek-right");
+        keyCodeNameMap.put(VK_J, "skill-sword");
         keyCodeNameMap.put(VK_K, "skill-sphere");
+        keyCodeNameMap.put(VK_L, "skill-shield");
 
         KeyManager.initialize(keyCodeNameMap);
 

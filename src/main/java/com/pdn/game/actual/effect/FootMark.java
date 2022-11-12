@@ -41,13 +41,14 @@ public class FootMark {
         float blue = (float) color.getBlue() / 255;
         float alpha = (float) (markRemaining / markDuration);
 
-        int currentSize = ((int) ((size - shrunkSize) * (markRemaining / markDuration))) + shrunkSize;
+        int currentSize = ((int) ((size - (shrunkSize)) * (markRemaining / markDuration))) + shrunkSize;
         int reducedSize = size - currentSize;
 
+        int x = (int) (screenLocation.getX() + location.getX() + (reducedSize / 2));
+        int y = (int) (screenLocation.getY() + location.getY() + (reducedSize / 2));
+
         graphics.setColor(new Color(red, green, blue, alpha));
-        graphics.fillRect((int) (screenLocation.getX() + location.getX()) + (reducedSize / 2),
-                (int) (screenLocation.getY() + location.getY() + (reducedSize / 2)),
-                currentSize, currentSize);
+        graphics.fillRect(x, y, currentSize, currentSize);
     }
 
     public boolean isExpired() {

@@ -69,9 +69,18 @@ public class BattleScreen implements Screen {
         unitList.forEach(unit -> unit.render(graphics, screenLocation));
         skillMissileManager.render(graphics, screenLocation);
 
+        Color swordColor = new Color(206, 150, 150);
+        SkillSet swordSkillSet = player.getSkillManager().getSkillSetMap().get("skill-sword");
+
         Color sphereColor = new Color(150, 192, 206);
         SkillSet sphereSkillSet = player.getSkillManager().getSkillSetMap().get("skill-sphere");
-        renderSkillSet(graphics, 1, sphereColor, sphereSkillSet.getTier(), sphereSkillSet.getTierCurrent());
+
+        Color shieldColor = new Color(165, 206, 150);
+        SkillSet shieldSkillSet = player.getSkillManager().getSkillSetMap().get("skill-shield");
+
+        renderSkillSet(graphics, 1, swordColor, swordSkillSet.getTier(), swordSkillSet.getTierCurrent());
+        renderSkillSet(graphics, 2, sphereColor, sphereSkillSet.getTier(), sphereSkillSet.getTierCurrent());
+        renderSkillSet(graphics, 3, shieldColor, shieldSkillSet.getTier(), shieldSkillSet.getTierCurrent());
 
         graphics.setColor(WHITE);
         graphics.drawString("Battle", 30, 30);
@@ -85,7 +94,7 @@ public class BattleScreen implements Screen {
         int gaugeWidth = pointWidth + 3;
         int gaugeHeight = (pointHeight * tier) + (tier + 2);
 
-        int gaugeX = 10;
+        int gaugeX = 10 + (gaugeWidth * (setCount - 1)) + (3 * (setCount - 1));
         int gaugeY = SCREEN_HEIGHT - 10 - gaugeHeight;
 
         graphics.setColor(color);

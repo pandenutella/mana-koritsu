@@ -5,7 +5,9 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
 import com.pdn.game.actual.skill.ManaBlastSkill;
+import com.pdn.game.actual.skill.ManaBlockSkill;
 import com.pdn.game.actual.skill.ManaBurstSkill;
+import com.pdn.game.actual.skill.ManaStabSkill;
 import com.pdn.game.actual.skill.Skill;
 import com.pdn.game.actual.skill.SkillManager;
 import com.pdn.game.actual.skill.SkillMissileManager;
@@ -41,6 +43,13 @@ public class Unit implements Entity {
 
         moveDirection = UP;
 
+        Map<Integer, Skill> swordSkillTierMap = new HashMap<>();
+        swordSkillTierMap.put(1, new ManaStabSkill(this, skillMissileManager));
+        swordSkillTierMap.put(2, new ManaStabSkill(this, skillMissileManager));
+        swordSkillTierMap.put(3, new ManaStabSkill(this, skillMissileManager));
+
+        SkillSet swordSkillSet = new SkillSet(swordSkillTierMap);
+
         Map<Integer, Skill> sphereSkillTierMap = new HashMap<>();
         sphereSkillTierMap.put(1, new ManaBurstSkill(this, skillMissileManager));
         sphereSkillTierMap.put(2, new ManaBlastSkill(this, skillMissileManager));
@@ -48,8 +57,17 @@ public class Unit implements Entity {
 
         SkillSet sphereSkillSet = new SkillSet(sphereSkillTierMap);
 
+        Map<Integer, Skill> shieldSkillTierMap = new HashMap<>();
+        shieldSkillTierMap.put(1, new ManaBlockSkill(this, skillMissileManager));
+        shieldSkillTierMap.put(2, new ManaBlockSkill(this, skillMissileManager));
+        shieldSkillTierMap.put(3, new ManaBlockSkill(this, skillMissileManager));
+
+        SkillSet shieldSkillSet = new SkillSet(shieldSkillTierMap);
+
         Map<String, SkillSet> skillMap = new HashMap<>();
+        skillMap.put("skill-sword", swordSkillSet);
         skillMap.put("skill-sphere", sphereSkillSet);
+        skillMap.put("skill-shield", shieldSkillSet);
 
         skillManager = new SkillManager(skillMap);
 
