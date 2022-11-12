@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
 import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
-import static java.awt.Color.BLACK;
+import static java.awt.Color.WHITE;
 
 public class HomeScreen implements Screen {
 
@@ -18,7 +18,7 @@ public class HomeScreen implements Screen {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(BLACK);
+        graphics.setColor(WHITE);
         graphics.drawString("Home", 30, 30);
         graphics.drawString("Press [SPACE] to play", 30, 45);
     }

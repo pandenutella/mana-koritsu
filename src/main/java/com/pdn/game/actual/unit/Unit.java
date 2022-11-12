@@ -11,7 +11,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import static com.pdn.game.actual.common.Direction.UP;
-import static java.awt.Color.BLACK;
+import static java.awt.Color.WHITE;
 
 public class Unit implements Entity {
     private final String name;
@@ -32,7 +32,7 @@ public class Unit implements Entity {
 
         direction = UP;
 
-        Color color = new Color(0, 0, 0);
+        Color color = new Color(255, 255, 255);
         footMarkSpawner = new FootMarkSpawner(this, color, 30, 30, 150, 750, 5);
     }
 
@@ -82,7 +82,7 @@ public class Unit implements Entity {
     public void render(Graphics graphics, Location screenLocation) {
         footMarkSpawner.render(graphics, screenLocation);
 
-        graphics.setColor(BLACK);
+        graphics.setColor(WHITE);
         graphics.fillRect((int) (screenLocation.getX() + location.getX()), (int) (screenLocation.getY() + location.getY()), size, size);
 
     }
