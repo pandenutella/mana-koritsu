@@ -25,7 +25,7 @@ public class EnemyController extends UnitController {
         if (decisionCounter > 1000) {
             decisionCounter -= 1000;
 
-            int direction = random.nextInt(5);
+            int direction = random.nextInt(6);
             switch (direction) {
                 case 0:
                     unit.moveTowards(UP);
@@ -41,6 +41,9 @@ public class EnemyController extends UnitController {
                     break;
                 case 4:
                     unit.stop();
+                    break;
+                case 5:
+                    unit.useSkill();
                     break;
                 default:
                     break;

@@ -33,11 +33,17 @@ public class BattleScreen implements Screen {
         unitList.add(player);
         unitControllerList.add(new PlayerController(player));
 
-        Unit enemy = new Unit("eMk", new Location(850, 325), skillMissileManager);
-        unitList.add(enemy);
-        unitControllerList.add(new EnemyController(enemy));
+        spawnEnemy(850, 325);
+        spawnEnemy(650, 325);
+        spawnEnemy(450, 325);
 
         camera = new FocusedCamera(screenLocation, player);
+    }
+
+    private void spawnEnemy(int x, int y) {
+        Unit enemy = new Unit("", new Location(x, y), skillMissileManager);
+        unitList.add(enemy);
+        unitControllerList.add(new EnemyController(enemy));
     }
 
     @Override
