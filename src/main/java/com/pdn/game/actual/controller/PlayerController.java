@@ -51,6 +51,6 @@ public class PlayerController extends UnitController {
         if (latestPressedSkill == null)
             return;
 
-        unit.useSkill();
+        unit.useSkill(latestPressedSkill);
     }
 }

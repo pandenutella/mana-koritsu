@@ -4,11 +4,15 @@ import com.pdn.game.actual.Entity;
 import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
-import com.pdn.game.actual.skill.ManaBlastMissile;
+import com.pdn.game.actual.skill.ManaBlastSkill;
+import com.pdn.game.actual.skill.Skill;
+import com.pdn.game.actual.skill.SkillManager;
 import com.pdn.game.actual.skill.SkillMissileManager;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.pdn.game.actual.common.Direction.UP;
 import static java.awt.Color.WHITE;
@@ -18,13 +22,15 @@ public class Unit implements Entity {
     private final Location location;
     private final SkillMissileManager skillMissileManager;
 
+    private final SkillManager skillManager;
+    private final FootMarkSpawner footMarkSpawner;
+
+    private final int size = 50;
+
     private Direction moveDirection;
     private Direction peekDirection;
     private boolean moving;
     private double moveSpeed = 300;
-    private final int size = 50;
-
-    private final FootMarkSpawner footMarkSpawner;
 
     public Unit(String name, Location location, SkillMissileManager skillMissileManager) {
         this.name = name;
@@ -32,6 +38,11 @@ public class Unit implements Entity {
         this.skillMissileManager = skillMissileManager;
 
         moveDirection = UP;
+
+        Map<String, Skill> skillMap = new HashMap<>();
+        skillMap.put("skill-sphere", new ManaBlastSkill(this, skillMissileManager));
+
+        skillManager = new SkillManager(skillMap);
 
         Color color = new Color(255, 255, 255);
         footMarkSpawner = new FootMarkSpawner(this, color, 30, 30, 150, 750, 5);
@@ -46,40 +57,8 @@ public class Unit implements Entity {
         moving = false;
     }
 
-    private boolean onCooldown = false;
-    private double cooldownCounter = 0;
-
-    public void useSkill() {
-        if (onCooldown)
-            return;
-
-        onCooldown = true;
-
-        double x = location.getX() + (double) (size / 2) - (double) (40 / 2);
-        double y = location.getY() + (double) (size / 2) - (double) (40 / 2);
-
-        int missileDirectionOrdinal = moveDirection.ordinal();
-        if (peekDirection != null) {
-            switch (peekDirection) {
-                case LEFT:
-                    missileDirectionOrdinal--;
-                    break;
-                case RIGHT:
-                    missileDirectionOrdinal++;
-                    break;
-                default:
-                    break;
-            }
-
-            if (missileDirectionOrdinal < 0)
-                missileDirectionOrdinal += 4;
-            else if (missileDirectionOrdinal > 3)
-                missileDirectionOrdinal -= 4;
-        }
-
-        Direction missileDirection = Direction.values()[missileDirectionOrdinal];
-
-        skillMissileManager.add(new ManaBlastMissile(this, new Location(x, y), missileDirection));
+    public void useSkill(String skillName) {
+        skillManager.useSkill(skillName);
     }
 
     public void peekTowards(Direction direction) {
@@ -97,15 +76,7 @@ public class Unit implements Entity {
             location.adjustTowardsDirection(distance, moveDirection);
         }
 
-        if (onCooldown) {
-            cooldownCounter += deltaTime;
-
-            if (cooldownCounter > 1000) {
-                onCooldown = false;
-                cooldownCounter = 0;
-            }
-        }
-
+        skillManager.update(deltaTime);
         footMarkSpawner.update(deltaTime);
     }
 

@@ -45,7 +45,7 @@ public class EnemyController extends UnitController {
                     unit.stopMoving();
                     break;
                 case 5:
-                    unit.useSkill();
+                    unit.useSkill("skill-sphere");
                     break;
                 default:
                     break;
