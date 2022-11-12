@@ -4,6 +4,7 @@ import com.pdn.game.actual.common.Location;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class UnitFootMarkManager {
@@ -13,6 +14,7 @@ public class UnitFootMarkManager {
     private final Unit unit;
 
     private final List<UnitFootMark> unitFootMarkList = new ArrayList<>();
+
     private double accumulated = 0;
     private boolean leftFoot = true;
 
@@ -65,6 +67,9 @@ public class UnitFootMarkManager {
     }
 
     public void render(Graphics graphics, Location screenLocation) {
-        unitFootMarkList.forEach(unitFootMark -> unitFootMark.render(graphics, screenLocation));
+        try {
+            unitFootMarkList.forEach(unitFootMark -> unitFootMark.render(graphics, screenLocation));
+        } catch (ConcurrentModificationException ignored) {
+        }
     }
 }
