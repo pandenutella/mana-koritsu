@@ -17,13 +17,15 @@ public class EnemyController extends UnitController {
 
     private final Random random = new Random();
 
-    private double decisionCounter = 0;
+    private double decisionCounterCurrent = 0;
+    private double decisionCounter = 1000;
 
     @Override
     public void update(double deltaTime) {
-        decisionCounter += deltaTime;
-        if (decisionCounter > 1000) {
-            decisionCounter -= 1000;
+        decisionCounterCurrent += deltaTime;
+        if (decisionCounterCurrent > decisionCounter) {
+            decisionCounterCurrent = 0;
+            decisionCounter = random.nextInt(1250) + 250;
 
             int direction = random.nextInt(6);
             switch (direction) {
@@ -40,7 +42,7 @@ public class EnemyController extends UnitController {
                     unit.moveTowards(RIGHT);
                     break;
                 case 4:
-                    unit.stop();
+                    unit.stopMoving();
                     break;
                 case 5:
                     unit.useSkill();

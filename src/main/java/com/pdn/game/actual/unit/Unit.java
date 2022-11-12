@@ -18,7 +18,8 @@ public class Unit implements Entity {
     private final Location location;
     private final SkillMissileManager skillMissileManager;
 
-    private Direction direction;
+    private Direction moveDirection;
+    private Direction peekDirection;
     private boolean moving;
     private double moveSpeed = 300;
     private final int size = 50;
@@ -30,18 +31,18 @@ public class Unit implements Entity {
         this.location = location;
         this.skillMissileManager = skillMissileManager;
 
-        direction = UP;
+        moveDirection = UP;
 
         Color color = new Color(255, 255, 255);
         footMarkSpawner = new FootMarkSpawner(this, color, 30, 30, 150, 750, 5);
     }
 
     public void moveTowards(Direction direction) {
-        this.direction = direction;
+        this.moveDirection = direction;
         moving = true;
     }
 
-    public void stop() {
+    public void stopMoving() {
         moving = false;
     }
 
@@ -57,14 +58,43 @@ public class Unit implements Entity {
         double x = location.getX() + (double) (size / 2) - (double) (40 / 2);
         double y = location.getY() + (double) (size / 2) - (double) (40 / 2);
 
-        skillMissileManager.add(new ManaBlastMissile(this, new Location(x, y), direction));
+        int missileDirectionOrdinal = moveDirection.ordinal();
+        if (peekDirection != null) {
+            switch (peekDirection) {
+                case LEFT:
+                    missileDirectionOrdinal--;
+                    break;
+                case RIGHT:
+                    missileDirectionOrdinal++;
+                    break;
+                default:
+                    break;
+            }
+
+            if (missileDirectionOrdinal < 0)
+                missileDirectionOrdinal += 4;
+            else if (missileDirectionOrdinal > 3)
+                missileDirectionOrdinal -= 4;
+        }
+
+        Direction missileDirection = Direction.values()[missileDirectionOrdinal];
+
+        skillMissileManager.add(new ManaBlastMissile(this, new Location(x, y), missileDirection));
+    }
+
+    public void peekTowards(Direction direction) {
+        peekDirection = direction;
+    }
+
+    public void stopPeeking() {
+        peekDirection = null;
     }
 
     public void update(double deltaTime) {
         if (moving) {
             double distance = moveSpeed * (deltaTime / 1000);
 
-            location.adjustTowardsDirection(distance, direction);
+            location.adjustTowardsDirection(distance, moveDirection);
         }
 
         if (onCooldown) {
@@ -98,7 +128,7 @@ public class Unit implements Entity {
 
     @Override
     public Direction getDirection() {
-        return direction;
+        return moveDirection;
     }
 
     @Override
@@ -109,5 +139,9 @@ public class Unit implements Entity {
     @Override
     public int getSize() {
         return size;
+    }
+
+    public Direction getPeekDirection() {
+        return peekDirection;
     }
 }

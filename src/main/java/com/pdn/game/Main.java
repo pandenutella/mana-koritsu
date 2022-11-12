@@ -14,8 +14,10 @@ import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
 import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_D;
+import static java.awt.event.KeyEvent.VK_E;
 import static java.awt.event.KeyEvent.VK_ESCAPE;
 import static java.awt.event.KeyEvent.VK_K;
+import static java.awt.event.KeyEvent.VK_Q;
 import static java.awt.event.KeyEvent.VK_S;
 import static java.awt.event.KeyEvent.VK_SPACE;
 import static java.awt.event.KeyEvent.VK_W;
@@ -34,6 +36,8 @@ public class Main {
         keyCodeNameMap.put(VK_D, "move-right");
         keyCodeNameMap.put(VK_S, "move-down");
         keyCodeNameMap.put(VK_A, "move-left");
+        keyCodeNameMap.put(VK_Q, "peek-left");
+        keyCodeNameMap.put(VK_E, "peek-right");
         keyCodeNameMap.put(VK_K, "skill-sphere");
 
         KeyManager.initialize(keyCodeNameMap);

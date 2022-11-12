@@ -16,6 +16,7 @@ public class PlayerController extends UnitController {
     @Override
     public void update(double deltaTime) {
         checkMovementInputs();
+        checkPeekInputs();
         checkSkillInputs();
     }
 
@@ -23,13 +24,26 @@ public class PlayerController extends UnitController {
         String latestPressedMove = getGlobalKeyManager().getLatestPressedKey("move-");
         if (latestPressedMove == null) {
             if (unit.isMoving())
-                unit.stop();
+                unit.stopMoving();
 
             return;
         }
 
         Direction direction = Direction.valueOf(latestPressedMove.substring(5).toUpperCase(Locale.ENGLISH));
         unit.moveTowards(direction);
+    }
+
+    private void checkPeekInputs() {
+        String latestPressedPeek = getGlobalKeyManager().getLatestPressedKey("peek-");
+        if (latestPressedPeek == null) {
+            if (unit.getPeekDirection() != null)
+                unit.stopPeeking();
+
+            return;
+        }
+
+        Direction direction = Direction.valueOf(latestPressedPeek.substring(5).toUpperCase(Locale.ENGLISH));
+        unit.peekTowards(direction);
     }
 
     private void checkSkillInputs() {
