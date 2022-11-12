@@ -45,11 +45,12 @@ public class Unit {
         unitFootMarkManager.update(deltaTime);
     }
 
-    public void render(Graphics graphics) {
-        graphics.setColor(BLACK);
-        graphics.fillRect((int) location.getX(), (int) location.getY(), SIZE, SIZE);
+    public void render(Graphics graphics, Location screenLocation) {
+        unitFootMarkManager.render(graphics, screenLocation);
 
-        unitFootMarkManager.render(graphics);
+        graphics.setColor(BLACK);
+        graphics.fillRect((int) (screenLocation.getX() + location.getX()), (int) (screenLocation.getY() + location.getY()), SIZE, SIZE);
+
     }
 
     public String getName() {

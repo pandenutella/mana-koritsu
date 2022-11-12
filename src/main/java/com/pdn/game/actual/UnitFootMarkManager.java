@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UnitFootMarkManager {
-    private static final double MILLISECONDS_TO_SPAWN = 100;
+    private static final double MILLISECONDS_TO_SPAWN = 150;
     private static final double DURATION = 3000;
 
     private final Unit unit;
@@ -62,7 +62,7 @@ public class UnitFootMarkManager {
         unitFootMarkList.removeIf(UnitFootMark::isExpired);
     }
 
-    public void render(Graphics graphics) {
-        unitFootMarkList.forEach(unitFootMark -> unitFootMark.render(graphics));
+    public void render(Graphics graphics, Location screenLocation) {
+        unitFootMarkList.forEach(unitFootMark -> unitFootMark.render(graphics, screenLocation));
     }
 }

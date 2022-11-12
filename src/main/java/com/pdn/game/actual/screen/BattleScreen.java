@@ -1,8 +1,10 @@
 package com.pdn.game.actual.screen;
 
+import com.pdn.game.actual.Camera;
 import com.pdn.game.actual.Location;
 import com.pdn.game.actual.Unit;
 import com.pdn.game.actual.UnitController;
+import com.pdn.game.actual.camera.FocusedCamera;
 import com.pdn.game.engine.ui.Screen;
 
 import java.awt.Graphics;
@@ -15,6 +17,9 @@ public class BattleScreen implements Screen {
 
     private final Unit player;
     private final UnitController playerController;
+    private final Camera camera;
+
+    private final Location screenLocation = new Location(0, 0);
 
     public BattleScreen() {
         String playerName = "Mk";
@@ -22,6 +27,7 @@ public class BattleScreen implements Screen {
 
         player = new Unit(playerName, playerLocation);
         playerController = new UnitController(player);
+        camera = new FocusedCamera(screenLocation, player);
     }
 
     @Override
@@ -31,6 +37,8 @@ public class BattleScreen implements Screen {
 
         playerController.update();
         player.update(deltaTime);
+
+        camera.update(deltaTime);
     }
 
     @Override
@@ -39,6 +47,6 @@ public class BattleScreen implements Screen {
         graphics.drawString("Battle", 30, 30);
         graphics.drawString("Press [ESCAPE] to go back", 30, 45);
 
-        player.render(graphics);
+        player.render(graphics, screenLocation);
     }
 }

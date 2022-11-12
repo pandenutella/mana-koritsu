@@ -25,14 +25,14 @@ public class UnitFootMark {
             expired = true;
     }
 
-    public void render(Graphics graphics) {
+    public void render(Graphics graphics, Location screenLocation) {
         if (expired)
             return;
 
         float alpha = (float) (markRemaining / markDuration);
 
         graphics.setColor(new Color(0, 0, 0, alpha));
-        graphics.fillRect((int) location.getX(), (int) location.getY(), SIZE, SIZE);
+        graphics.fillRect((int) (screenLocation.getX() + location.getX()), (int) (screenLocation.getY() + location.getY()), SIZE, SIZE);
     }
 
     public boolean isExpired() {
