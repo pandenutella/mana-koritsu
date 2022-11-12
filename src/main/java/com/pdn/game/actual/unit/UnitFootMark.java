@@ -1,4 +1,6 @@
-package com.pdn.game.actual;
+package com.pdn.game.actual.unit;
+
+import com.pdn.game.actual.common.Location;
 
 import java.awt.Color;
 import java.awt.Graphics;

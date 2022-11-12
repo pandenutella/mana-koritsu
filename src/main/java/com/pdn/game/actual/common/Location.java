@@ -1,4 +1,4 @@
-package com.pdn.game.actual;
+package com.pdn.game.actual.common;
 
 public class Location {
     private double x;
@@ -32,14 +32,6 @@ public class Location {
 
     public void adjustY(double y) {
         this.y += y;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public double getX() {

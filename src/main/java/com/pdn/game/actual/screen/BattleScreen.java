@@ -1,9 +1,9 @@
 package com.pdn.game.actual.screen;
 
-import com.pdn.game.actual.Camera;
-import com.pdn.game.actual.Location;
-import com.pdn.game.actual.Unit;
-import com.pdn.game.actual.UnitController;
+import com.pdn.game.actual.camera.Camera;
+import com.pdn.game.actual.common.Location;
+import com.pdn.game.actual.unit.Unit;
+import com.pdn.game.actual.unit.UnitController;
 import com.pdn.game.actual.camera.FocusedCamera;
 import com.pdn.game.engine.ui.Screen;
 

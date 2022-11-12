@@ -1,8 +1,11 @@
-package com.pdn.game.actual;
+package com.pdn.game.actual.unit;
+
+import com.pdn.game.actual.common.Location;
+import com.pdn.game.actual.common.Direction;
 
 import java.awt.Graphics;
 
-import static com.pdn.game.actual.Direction.UP;
+import static com.pdn.game.actual.common.Direction.UP;
 import static java.awt.Color.BLACK;
 
 public class Unit {
