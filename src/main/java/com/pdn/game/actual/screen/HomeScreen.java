@@ -25,15 +25,15 @@ public class HomeScreen implements Screen {
 
         graphics.setColor(WHITE);
 
-        graphics.setFont(new Font("SCRUBLAND", PLAIN, 112));
-        String titleText = "Mana Koritsu";
+        graphics.setFont(new Font("Game Over", PLAIN, 240));
+        String titleText = "MANA KORITSU";
         int titleTextWidth = graphics.getFontMetrics().stringWidth(titleText);
         graphics.drawString(titleText, (Painter.WIDTH / 2) - (titleTextWidth / 2), 400);
 
-        graphics.setFont(new Font("SCRUBLAND", PLAIN, 36));
-        String playText = "Press [space] to play";
+        graphics.setFont(new Font("Game Over", PLAIN, 72));
+        String playText = "Press [SPACE] to Play";
         int playTextWidth = graphics.getFontMetrics().stringWidth(playText);
-        graphics.drawString(playText, (Painter.WIDTH / 2) - (playTextWidth / 2), (Painter.HEIGHT / 2) + 100);
+        graphics.drawString(playText, (Painter.WIDTH / 2) - (playTextWidth / 2), (Painter.HEIGHT / 2) + 200);
 
         graphics.setFont(oldFont);
     }

@@ -94,8 +94,8 @@ public class BattleScreen implements Screen {
         Font oldFont = graphics.getFont();
 
         graphics.setColor(WHITE);
-        graphics.setFont(new Font("SCRUBLAND", PLAIN, 36));
-        graphics.drawString("[esc]", 30, 60);
+        graphics.setFont(new Font("Game Over", PLAIN, 72));
+        graphics.drawString("[ESC]", 30, 50);
 
         graphics.setFont(oldFont);
     }

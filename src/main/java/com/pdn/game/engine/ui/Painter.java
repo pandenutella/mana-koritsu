@@ -33,7 +33,7 @@ public class Painter {
             this.game = game;
 
             GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            URL fontFile = getClass().getClassLoader().getResource("SCRUBLAND.ttf");
+            URL fontFile = getClass().getClassLoader().getResource("game_over.ttf");
 
             graphicsEnvironment.registerFont(createFont(TRUETYPE_FONT, new File(fontFile.toURI())));
         }
