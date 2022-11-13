@@ -1,19 +1,20 @@
 package com.pdn.game.actual.skill;
 
 import com.pdn.game.actual.common.Location;
+import lombok.NoArgsConstructor;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public class SkillMissileManager {
     private static SkillMissileManager instance;
 
     private final List<SkillMissile> skillMissileList = new ArrayList<>();
-
-    private SkillMissileManager() {
-    }
 
     public static void initialize() {
         instance = new SkillMissileManager();

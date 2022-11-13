@@ -1,19 +1,20 @@
 package com.pdn.game.actual.effect;
 
 import com.pdn.game.actual.common.Location;
+import lombok.NoArgsConstructor;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public class FootMarkManager {
     private static FootMarkManager instance;
 
     private final List<FootMark> footMarkList = new ArrayList<>();
-
-    private FootMarkManager() {
-    }
 
     public static void initialize() {
         instance = new FootMarkManager();

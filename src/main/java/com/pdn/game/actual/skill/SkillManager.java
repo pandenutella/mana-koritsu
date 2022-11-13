@@ -1,13 +1,12 @@
 package com.pdn.game.actual.skill;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.Map;
 
+@RequiredArgsConstructor
 public class SkillManager {
     private final Map<String, SkillSet> skillSetMap;
-
-    public SkillManager(Map<String, SkillSet> skillSetMap) {
-        this.skillSetMap = skillSetMap;
-    }
 
     public void useSkill(String name) {
         SkillSet skillSet = skillSetMap.get(name);

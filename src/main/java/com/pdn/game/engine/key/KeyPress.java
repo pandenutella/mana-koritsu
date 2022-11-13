@@ -1,5 +1,8 @@
 package com.pdn.game.engine.key;
 
+import lombok.Getter;
+
+@Getter
 public class KeyPress {
     private final String name;
 
@@ -18,17 +21,5 @@ public class KeyPress {
     public void release() {
         pressed = false;
         lastInteraction = System.currentTimeMillis();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isPressed() {
-        return pressed;
-    }
-
-    public double getLastInteraction() {
-        return lastInteraction;
     }
 }

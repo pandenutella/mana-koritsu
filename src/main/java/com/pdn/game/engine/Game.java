@@ -1,11 +1,13 @@
 package com.pdn.game.engine;
 
 import com.pdn.game.engine.ui.Window;
+import lombok.Setter;
 
 import java.awt.Graphics;
 
 import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
 
+@Setter
 public class Game {
     private Window window;
 
@@ -38,9 +40,5 @@ public class Game {
 
     public void render(Graphics graphics) {
         getGlobalScreenManager().getScreen().render(graphics);
-    }
-
-    public void setWindow(Window window) {
-        this.window = window;
     }
 }

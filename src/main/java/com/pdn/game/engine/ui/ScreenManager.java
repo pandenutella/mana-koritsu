@@ -1,14 +1,16 @@
 package com.pdn.game.engine.ui;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class ScreenManager {
     private static ScreenManager instance;
 
     private final ScreenFactory screenFactory;
-    private Screen screen;
 
-    private ScreenManager(ScreenFactory screenFactory) {
-        this.screenFactory = screenFactory;
-    }
+    @Getter
+    private Screen screen;
 
     public static void initialize(ScreenFactory screenFactory) {
         if (instance != null)
@@ -23,9 +25,5 @@ public class ScreenManager {
 
     public void goTo(String screenName) {
         screen = screenFactory.getScreen(screenName);
-    }
-
-    public Screen getScreen() {
-        return screen;
     }
 }

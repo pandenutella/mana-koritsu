@@ -12,6 +12,7 @@ import com.pdn.game.actual.skill.ManaDualBlastSkill;
 import com.pdn.game.actual.skill.Skill;
 import com.pdn.game.actual.skill.SkillManager;
 import com.pdn.game.actual.skill.SkillSet;
+import lombok.Getter;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,16 +24,25 @@ import static java.awt.Color.WHITE;
 
 public class Unit implements Entity {
     private final String name;
+
+    @Getter
     private final Location location;
 
+    @Getter
     private final SkillManager skillManager;
-    private final FootMarkSpawner footMarkSpawner;
 
+    private final FootMarkSpawner footMarkSpawner;
     private final int size = 50;
 
+    @Getter
     private Direction direction;
+
+    @Getter
     private Direction peekDirection;
+
+    @Getter
     private boolean moving;
+
     private double moveSpeed = 300;
     private boolean paused = false;
 
@@ -133,21 +143,6 @@ public class Unit implements Entity {
     }
 
     @Override
-    public Location getLocation() {
-        return location;
-    }
-
-    @Override
-    public Direction getDirection() {
-        return direction;
-    }
-
-    @Override
-    public boolean isMoving() {
-        return moving;
-    }
-
-    @Override
     public int getWidth(Direction direction) {
         return size;
     }
@@ -155,14 +150,6 @@ public class Unit implements Entity {
     @Override
     public int getHeight(Direction direction) {
         return size;
-    }
-
-    public Direction getPeekDirection() {
-        return peekDirection;
-    }
-
-    public SkillManager getSkillManager() {
-        return skillManager;
     }
 
     public Direction getSkillDirection() {

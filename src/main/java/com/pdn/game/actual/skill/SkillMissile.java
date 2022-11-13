@@ -4,29 +4,29 @@ import com.pdn.game.actual.Entity;
 import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.unit.Unit;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
+@RequiredArgsConstructor
 public abstract class SkillMissile implements Entity {
     protected final Unit user;
+
+    @Getter
     protected final Location location;
+
+    @Getter
     protected final Direction direction;
     protected final double moveSpeed;
     protected final double maxRange;
     protected final Color color;
 
     protected double distanceTravelled;
-    protected boolean expired = false;
 
-    public SkillMissile(Unit user, Location location, Direction direction, double moveSpeed, double maxRange, Color color) {
-        this.user = user;
-        this.location = location;
-        this.direction = direction;
-        this.moveSpeed = moveSpeed;
-        this.maxRange = maxRange;
-        this.color = color;
-    }
+    @Getter
+    protected boolean expired = false;
 
     public abstract void update(double deltaTime);
 
@@ -50,22 +50,8 @@ public abstract class SkillMissile implements Entity {
         graphics.fillRect(x, y, getWidth(direction), getHeight(direction));
     }
 
-    public boolean isExpired() {
-        return expired;
-    }
-
     @Override
     public boolean isMoving() {
         return true;
-    }
-
-    @Override
-    public Direction getDirection() {
-        return direction;
-    }
-
-    @Override
-    public Location getLocation() {
-        return location;
     }
 }

@@ -1,14 +1,15 @@
 package com.pdn.game.actual.skill;
 
 import com.pdn.game.actual.unit.Unit;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public abstract class Skill {
     protected final Unit unit;
-    private boolean takingEffect;
 
-    public Skill(Unit unit) {
-        this.unit = unit;
-    }
+    @Getter
+    private boolean takingEffect;
 
     public void use() {
         takingEffect = true;
@@ -22,9 +23,5 @@ public abstract class Skill {
 
     public void endEffect() {
         takingEffect = false;
-    }
-
-    public boolean isTakingEffect() {
-        return takingEffect;
     }
 }

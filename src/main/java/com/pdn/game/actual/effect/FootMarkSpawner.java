@@ -2,9 +2,11 @@ package com.pdn.game.actual.effect;
 
 import com.pdn.game.actual.Entity;
 import com.pdn.game.actual.common.Location;
+import lombok.RequiredArgsConstructor;
 
 import java.awt.Color;
 
+@RequiredArgsConstructor
 public class FootMarkSpawner {
     private final Entity entity;
     private final Color color;
@@ -16,16 +18,6 @@ public class FootMarkSpawner {
 
     private double accumulated = 0;
     private boolean leftFoot = true;
-
-    public FootMarkSpawner(Entity entity, Color color, int size, int shrunkSize, double spawnTime, double duration, int offset) {
-        this.entity = entity;
-        this.color = color;
-        this.size = size;
-        this.shrunkSize = shrunkSize;
-        this.spawnTime = spawnTime;
-        this.duration = duration;
-        this.offset = offset;
-    }
 
     private void spawn(double deltaTime) {
         accumulated += deltaTime;

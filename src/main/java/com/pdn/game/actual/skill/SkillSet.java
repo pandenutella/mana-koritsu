@@ -1,20 +1,31 @@
 package com.pdn.game.actual.skill;
 
+import lombok.Getter;
+
 import java.util.Map;
 
 public class SkillSet {
     private final Map<Integer, Skill> skillTierMap;
 
     private final double coolDown = 500;
+
+    @Getter
     private final double replenish = 5000;
+
+    @Getter
     private final int tier;
 
     private double coolDownCurrent = 0;
+
+    @Getter
     private boolean onCoolDown = false;
 
+    @Getter
     private double replenishCurrent = 0;
+
     private boolean replenishing = false;
 
+    @Getter
     private int tierCurrent;
 
     public SkillSet(Map<Integer, Skill> skillTierMap) {
@@ -62,26 +73,6 @@ public class SkillSet {
         skillTierMap.values().stream()
                 .filter(Skill::isTakingEffect)
                 .forEach(skill -> skill.update(deltaTime));
-    }
-
-    public int getTierCurrent() {
-        return tierCurrent;
-    }
-
-    public int getTier() {
-        return tier;
-    }
-
-    public boolean isOnCoolDown() {
-        return onCoolDown;
-    }
-
-    public double getReplenish() {
-        return replenish;
-    }
-
-    public double getReplenishCurrent() {
-        return replenishCurrent;
     }
 
     public boolean isReplenishing() {

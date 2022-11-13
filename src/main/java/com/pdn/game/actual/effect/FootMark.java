@@ -1,6 +1,7 @@
 package com.pdn.game.actual.effect;
 
 import com.pdn.game.actual.common.Location;
+import lombok.Getter;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,6 +14,8 @@ public class FootMark {
     private final double markDuration;
 
     private double markRemaining;
+
+    @Getter
     private boolean expired;
 
     public FootMark(Location location, Color color, int size, int shrunkSize, double duration) {
@@ -49,9 +52,5 @@ public class FootMark {
 
         graphics.setColor(new Color(red, green, blue, alpha));
         graphics.fillRect(x, y, currentSize, currentSize);
-    }
-
-    public boolean isExpired() {
-        return expired;
     }
 }
