@@ -35,6 +35,11 @@ public class SkillMissileManager {
     public void render(Graphics graphics, Location screenLocation) {
         List<SkillMissile> clonedSkillMissile = new ArrayList<>(skillMissileList);
 
-        clonedSkillMissile.forEach(skillMissile -> skillMissile.render(graphics, screenLocation));
+        for (SkillMissile skillMissile : clonedSkillMissile) {
+            if (skillMissile == null)
+                continue;
+
+            skillMissile.render(graphics, screenLocation);
+        }
     }
 }

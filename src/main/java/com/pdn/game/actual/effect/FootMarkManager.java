@@ -35,6 +35,11 @@ public class FootMarkManager {
     public void render(Graphics graphics, Location screenLocation) {
         List<FootMark> clonedFootMarkList = new ArrayList<>(footMarkList);
 
-        clonedFootMarkList.forEach(footMark -> footMark.render(graphics, screenLocation));
+        for (FootMark footMark : clonedFootMarkList) {
+            if (footMark == null)
+                continue;
+
+            footMark.render(graphics, screenLocation);
+        }
     }
 }
