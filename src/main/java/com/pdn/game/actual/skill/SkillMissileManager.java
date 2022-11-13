@@ -8,7 +8,20 @@ import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class SkillMissileManager {
+    private static SkillMissileManager instance;
+
     private final List<SkillMissile> skillMissileList = new ArrayList<>();
+
+    private SkillMissileManager() {
+    }
+
+    public static void initialize() {
+        instance = new SkillMissileManager();
+    }
+
+    public static SkillMissileManager getGlobalSkillMissileManager() {
+        return instance;
+    }
 
     public void add(SkillMissile skillMissile) {
         skillMissileList.add(skillMissile);

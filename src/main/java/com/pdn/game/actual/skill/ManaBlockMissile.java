@@ -25,7 +25,6 @@ public class ManaBlockMissile extends SkillMissile {
 
     @Override
     public void render(Graphics graphics, Location screenLocation) {
-        footMarkSpawner.render(graphics, screenLocation);
         renderBody(graphics, screenLocation);
     }
 

@@ -8,15 +8,12 @@ import static com.pdn.game.actual.common.Direction.DOWN;
 import static com.pdn.game.actual.common.Direction.LEFT;
 import static com.pdn.game.actual.common.Direction.RIGHT;
 import static com.pdn.game.actual.common.Direction.UP;
+import static com.pdn.game.actual.skill.SkillMissileManager.getGlobalSkillMissileManager;
 
 public class ManaDualBlastSkill extends Skill {
 
-    private final SkillMissileManager skillMissileManager;
-
-    public ManaDualBlastSkill(Unit unit, SkillMissileManager skillMissileManager) {
+    public ManaDualBlastSkill(Unit unit) {
         super(unit);
-
-        this.skillMissileManager = skillMissileManager;
     }
 
     @Override
@@ -32,8 +29,8 @@ public class ManaDualBlastSkill extends Skill {
         Location rightMissileLocation = new Location(x, y);
         rightMissileLocation.adjustTowardsDirection(50, getRightOf(missileDirection));
 
-        skillMissileManager.add(new ManaBlastMissile(unit, leftMissileLocation, missileDirection));
-        skillMissileManager.add(new ManaBlastMissile(unit, rightMissileLocation, missileDirection));
+        getGlobalSkillMissileManager().add(new ManaBlastMissile(unit, leftMissileLocation, missileDirection));
+        getGlobalSkillMissileManager().add(new ManaBlastMissile(unit, rightMissileLocation, missileDirection));
 
         endEffect();
     }

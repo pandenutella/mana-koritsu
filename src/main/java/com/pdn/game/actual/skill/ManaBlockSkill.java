@@ -6,15 +6,12 @@ import com.pdn.game.actual.unit.Unit;
 
 import static com.pdn.game.actual.common.Direction.DOWN;
 import static com.pdn.game.actual.common.Direction.UP;
+import static com.pdn.game.actual.skill.SkillMissileManager.getGlobalSkillMissileManager;
 
 public class ManaBlockSkill extends Skill {
 
-    private final SkillMissileManager skillMissileManager;
-
-    public ManaBlockSkill(Unit unit, SkillMissileManager skillMissileManager) {
+    public ManaBlockSkill(Unit unit) {
         super(unit);
-
-        this.skillMissileManager = skillMissileManager;
     }
 
     @Override
@@ -32,7 +29,7 @@ public class ManaBlockSkill extends Skill {
         Location location = new Location(x, y);
         location.adjustTowardsDirection(offset, missileDirection);
 
-        skillMissileManager.add(new ManaBlockMissile(unit, location, missileDirection));
+        getGlobalSkillMissileManager().add(new ManaBlockMissile(unit, location, missileDirection));
 
         endEffect();
     }

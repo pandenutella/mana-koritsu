@@ -16,6 +16,9 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pdn.game.actual.effect.FootMarkManager.getGlobalFootMarkManager;
+import static com.pdn.game.actual.effect.FootMarkManager.initialize;
+import static com.pdn.game.actual.skill.SkillMissileManager.getGlobalSkillMissileManager;
 import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
 import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
 import static java.awt.Color.WHITE;
@@ -30,12 +33,10 @@ public class BattleScreen implements Screen {
     private final List<Unit> unitList = new ArrayList<>();
     private final List<UnitController> unitControllerList = new ArrayList<>();
 
-    private final SkillMissileManager skillMissileManager = new SkillMissileManager();
-
     private static final int SCREEN_HEIGHT = 653;
 
     public BattleScreen() {
-        player = new Unit("Mk", new Location(100, 325), skillMissileManager);
+        player = new Unit("Mk", new Location(100, 325));
         unitList.add(player);
         unitControllerList.add(new PlayerController(player));
 
@@ -44,10 +45,13 @@ public class BattleScreen implements Screen {
         spawnEnemy(450, 325);
 
         camera = new FocusedCamera(screenLocation, player);
+
+        SkillMissileManager.initialize();
+        initialize();
     }
 
     private void spawnEnemy(int x, int y) {
-        Unit enemy = new Unit("", new Location(x, y), skillMissileManager);
+        Unit enemy = new Unit("", new Location(x, y));
         unitList.add(enemy);
         unitControllerList.add(new EnemyController(enemy));
     }
@@ -59,7 +63,9 @@ public class BattleScreen implements Screen {
 
         unitControllerList.forEach(unitController -> unitController.update(deltaTime));
         unitList.forEach(unit -> unit.update(deltaTime));
-        skillMissileManager.update(deltaTime);
+
+        getGlobalSkillMissileManager().update(deltaTime);
+        getGlobalFootMarkManager().update(deltaTime);
 
         camera.update(deltaTime);
     }
@@ -67,7 +73,9 @@ public class BattleScreen implements Screen {
     @Override
     public void render(Graphics graphics) {
         unitList.forEach(unit -> unit.render(graphics, screenLocation));
-        skillMissileManager.render(graphics, screenLocation);
+
+        getGlobalSkillMissileManager().render(graphics, screenLocation);
+        getGlobalFootMarkManager().render(graphics, screenLocation);
 
         Color swordColor = new Color(206, 150, 150);
         SkillSet swordSkillSet = player.getSkillManager().getSkillSetMap().get("skill-sword");

@@ -4,16 +4,14 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.unit.Unit;
 
-public class ManaChargingStabSkill extends Skill {
+import static com.pdn.game.actual.skill.SkillMissileManager.getGlobalSkillMissileManager;
 
-    private final SkillMissileManager skillMissileManager;
+public class ManaChargingStabSkill extends Skill {
 
     private Direction missileDirection;
 
-    public ManaChargingStabSkill(Unit unit, SkillMissileManager skillMissileManager) {
+    public ManaChargingStabSkill(Unit unit) {
         super(unit);
-
-        this.skillMissileManager = skillMissileManager;
     }
 
     @Override
@@ -24,7 +22,7 @@ public class ManaChargingStabSkill extends Skill {
         double y = unit.getLocation().getY() + (double) (unit.getHeight(unit.getDirection()) / 2) - (double) (40 / 2);
 
         missileDirection = unit.getSkillDirection();
-        skillMissileManager.add(new ManaChargingStabMissile(unit, new Location(x, y), missileDirection));
+        getGlobalSkillMissileManager().add(new ManaChargingStabMissile(unit, new Location(x, y), missileDirection));
     }
 
     private double effectCounter = 0;

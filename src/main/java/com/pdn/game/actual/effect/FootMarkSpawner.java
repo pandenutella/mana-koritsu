@@ -4,10 +4,6 @@ import com.pdn.game.actual.Entity;
 import com.pdn.game.actual.common.Location;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.List;
 
 public class FootMarkSpawner {
     private final Entity entity;
@@ -17,8 +13,6 @@ public class FootMarkSpawner {
     private final double spawnTime;
     private final double duration;
     private final int offset;
-
-    private final List<FootMark> footMarkList = new ArrayList<>();
 
     private double accumulated = 0;
     private boolean leftFoot = true;
@@ -60,7 +54,8 @@ public class FootMarkSpawner {
                     break;
             }
 
-            footMarkList.add(new FootMark(new Location(markX, markY), color, size, shrunkSize, duration));
+            FootMark footMark = new FootMark(new Location(markX, markY), color, size, shrunkSize, duration);
+            FootMarkManager.getGlobalFootMarkManager().add(footMark);
 
             leftFoot = !leftFoot;
         }
@@ -69,15 +64,5 @@ public class FootMarkSpawner {
     public void update(double deltaTime) {
         if (entity.isMoving())
             spawn(deltaTime);
-
-        footMarkList.forEach(footMark -> footMark.update(deltaTime));
-        footMarkList.removeIf(FootMark::isExpired);
-    }
-
-    public void render(Graphics graphics, Location screenLocation) {
-        try {
-            footMarkList.forEach(footMark -> footMark.render(graphics, screenLocation));
-        } catch (ConcurrentModificationException | NullPointerException ignored) {
-        }
     }
 }

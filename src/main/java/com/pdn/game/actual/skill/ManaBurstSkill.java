@@ -4,14 +4,12 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.unit.Unit;
 
+import static com.pdn.game.actual.skill.SkillMissileManager.getGlobalSkillMissileManager;
+
 public class ManaBurstSkill extends Skill {
 
-    private final SkillMissileManager skillMissileManager;
-
-    public ManaBurstSkill(Unit unit, SkillMissileManager skillMissileManager) {
+    public ManaBurstSkill(Unit unit) {
         super(unit);
-
-        this.skillMissileManager = skillMissileManager;
     }
 
     @Override
@@ -20,7 +18,7 @@ public class ManaBurstSkill extends Skill {
         double y = unit.getLocation().getY() + (double) (unit.getHeight(unit.getDirection()) / 2) - (double) (50 / 2);
 
         Direction missileDirection = unit.getSkillDirection();
-        skillMissileManager.add(new ManaBurstMissile(unit, new Location(x, y), missileDirection));
+        getGlobalSkillMissileManager().add(new ManaBurstMissile(unit, new Location(x, y), missileDirection));
 
         endEffect();
     }

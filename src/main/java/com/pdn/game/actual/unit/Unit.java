@@ -11,7 +11,6 @@ import com.pdn.game.actual.skill.ManaChargingStabSkill;
 import com.pdn.game.actual.skill.ManaDualBlastSkill;
 import com.pdn.game.actual.skill.Skill;
 import com.pdn.game.actual.skill.SkillManager;
-import com.pdn.game.actual.skill.SkillMissileManager;
 import com.pdn.game.actual.skill.SkillSet;
 
 import java.awt.Color;
@@ -25,7 +24,6 @@ import static java.awt.Color.WHITE;
 public class Unit implements Entity {
     private final String name;
     private final Location location;
-    private final SkillMissileManager skillMissileManager;
 
     private final SkillManager skillManager;
     private final FootMarkSpawner footMarkSpawner;
@@ -38,31 +36,30 @@ public class Unit implements Entity {
     private double moveSpeed = 300;
     private boolean paused = false;
 
-    public Unit(String name, Location location, SkillMissileManager skillMissileManager) {
+    public Unit(String name, Location location) {
         this.name = name;
         this.location = location;
-        this.skillMissileManager = skillMissileManager;
 
         direction = UP;
 
         Map<Integer, Skill> swordSkillTierMap = new HashMap<>();
-        swordSkillTierMap.put(1, new ManaChargingStabSkill(this, skillMissileManager));
-        swordSkillTierMap.put(2, new ManaChargingStabSkill(this, skillMissileManager));
-        swordSkillTierMap.put(3, new ManaChargingStabSkill(this, skillMissileManager));
+        swordSkillTierMap.put(1, new ManaChargingStabSkill(this));
+        swordSkillTierMap.put(2, new ManaChargingStabSkill(this));
+        swordSkillTierMap.put(3, new ManaChargingStabSkill(this));
 
         SkillSet swordSkillSet = new SkillSet(swordSkillTierMap);
 
         Map<Integer, Skill> sphereSkillTierMap = new HashMap<>();
-        sphereSkillTierMap.put(1, new ManaBurstSkill(this, skillMissileManager));
-        sphereSkillTierMap.put(2, new ManaDualBlastSkill(this, skillMissileManager));
-        sphereSkillTierMap.put(3, new ManaBlastSkill(this, skillMissileManager));
+        sphereSkillTierMap.put(1, new ManaBurstSkill(this));
+        sphereSkillTierMap.put(2, new ManaDualBlastSkill(this));
+        sphereSkillTierMap.put(3, new ManaBlastSkill(this));
 
         SkillSet sphereSkillSet = new SkillSet(sphereSkillTierMap);
 
         Map<Integer, Skill> shieldSkillTierMap = new HashMap<>();
-        shieldSkillTierMap.put(1, new ManaBlockSkill(this, skillMissileManager));
-        shieldSkillTierMap.put(2, new ManaBlockSkill(this, skillMissileManager));
-        shieldSkillTierMap.put(3, new ManaBlockSkill(this, skillMissileManager));
+        shieldSkillTierMap.put(1, new ManaBlockSkill(this));
+        shieldSkillTierMap.put(2, new ManaBlockSkill(this));
+        shieldSkillTierMap.put(3, new ManaBlockSkill(this));
 
         SkillSet shieldSkillSet = new SkillSet(shieldSkillTierMap);
 
@@ -124,8 +121,6 @@ public class Unit implements Entity {
     }
 
     public void render(Graphics graphics, Location screenLocation) {
-        footMarkSpawner.render(graphics, screenLocation);
-
         int x = (int) (screenLocation.getX() + location.getX());
         int y = (int) (screenLocation.getY() + location.getY());
 
