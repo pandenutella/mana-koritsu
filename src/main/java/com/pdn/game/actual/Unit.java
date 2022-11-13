@@ -1,17 +1,16 @@
-package com.pdn.game.actual.unit;
+package com.pdn.game.actual;
 
-import com.pdn.game.actual.Entity;
+import com.pdn.game.actual.battle.Skill;
+import com.pdn.game.actual.battle.SkillManager;
+import com.pdn.game.actual.battle.SkillSet;
+import com.pdn.game.actual.battle.skill.ManaBlastSkill;
+import com.pdn.game.actual.battle.skill.ManaBlockSkill;
+import com.pdn.game.actual.battle.skill.ManaBurstSkill;
+import com.pdn.game.actual.battle.skill.ManaChargingStabSkill;
+import com.pdn.game.actual.battle.skill.ManaDualBlastSkill;
 import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
-import com.pdn.game.actual.skill.ManaBlastSkill;
-import com.pdn.game.actual.skill.ManaBlockSkill;
-import com.pdn.game.actual.skill.ManaBurstSkill;
-import com.pdn.game.actual.skill.ManaChargingStabSkill;
-import com.pdn.game.actual.skill.ManaDualBlastSkill;
-import com.pdn.game.actual.skill.Skill;
-import com.pdn.game.actual.skill.SkillManager;
-import com.pdn.game.actual.skill.SkillSet;
 import lombok.Getter;
 
 import java.awt.Color;

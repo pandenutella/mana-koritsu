@@ -1,7 +1,7 @@
 package com.pdn.game.actual.controller;
 
-import com.pdn.game.actual.unit.Unit;
-import com.pdn.game.actual.unit.UnitController;
+import com.pdn.game.actual.Unit;
+import com.pdn.game.actual.UnitController;
 
 import java.util.Random;
 

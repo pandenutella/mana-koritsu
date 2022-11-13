@@ -1,9 +1,10 @@
-package com.pdn.game.actual.skill;
+package com.pdn.game.actual.battle.missile;
 
+import com.pdn.game.actual.Unit;
+import com.pdn.game.actual.battle.SkillMissile;
 import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
-import com.pdn.game.actual.unit.Unit;
 
 import java.awt.Color;
 import java.awt.Graphics;

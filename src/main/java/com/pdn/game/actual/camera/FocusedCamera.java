@@ -1,7 +1,7 @@
 package com.pdn.game.actual.camera;
 
+import com.pdn.game.actual.Unit;
 import com.pdn.game.actual.common.Location;
-import com.pdn.game.actual.unit.Unit;
 
 public class FocusedCamera extends Camera {
 

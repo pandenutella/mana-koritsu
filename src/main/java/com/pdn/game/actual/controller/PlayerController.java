@@ -1,8 +1,8 @@
 package com.pdn.game.actual.controller;
 
+import com.pdn.game.actual.Unit;
+import com.pdn.game.actual.UnitController;
 import com.pdn.game.actual.common.Direction;
-import com.pdn.game.actual.unit.Unit;
-import com.pdn.game.actual.unit.UnitController;
 
 import java.util.Locale;
 

@@ -1,9 +1,9 @@
-package com.pdn.game.actual.skill;
+package com.pdn.game.actual.battle;
 
 import com.pdn.game.actual.Entity;
+import com.pdn.game.actual.Unit;
 import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
-import com.pdn.game.actual.unit.Unit;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

@@ -1,6 +1,6 @@
-package com.pdn.game.actual.skill;
+package com.pdn.game.actual.battle;
 
-import com.pdn.game.actual.unit.Unit;
+import com.pdn.game.actual.Unit;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

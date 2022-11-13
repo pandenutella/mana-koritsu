@@ -1,4 +1,4 @@
-package com.pdn.game.actual.skill;
+package com.pdn.game.actual.battle;
 
 import com.pdn.game.actual.common.Location;
 import lombok.NoArgsConstructor;

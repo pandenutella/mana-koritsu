@@ -1,4 +1,4 @@
-package com.pdn.game.actual.unit;
+package com.pdn.game.actual;
 
 import lombok.RequiredArgsConstructor;
 

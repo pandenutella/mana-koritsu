@@ -1,4 +1,4 @@
-package com.pdn.game.actual.skill;
+package com.pdn.game.actual.battle;
 
 import lombok.Getter;
 
