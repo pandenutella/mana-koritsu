@@ -16,30 +16,10 @@ public class ManaBlockSkill extends Skill {
 
     @Override
     protected void startEffect() {
-        double x = unit.getLocation().getX() + (double) (unit.getSize() / 2) - (double) (40 / 2);
-        double y = unit.getLocation().getY() + (double) (unit.getSize() / 2) - (double) (40 / 2);
+        double x = unit.getLocation().getX() + (double) (unit.getWidth() / 2) - (double) (50 / 2);
+        double y = unit.getLocation().getY() + (double) (unit.getWidth() / 2) - (double) (50 / 2);
 
-        int missileDirectionOrdinal = unit.getDirection().ordinal();
-        if (unit.getPeekDirection() != null) {
-            switch (unit.getPeekDirection()) {
-                case LEFT:
-                    missileDirectionOrdinal--;
-                    break;
-                case RIGHT:
-                    missileDirectionOrdinal++;
-                    break;
-                default:
-                    break;
-            }
-
-            if (missileDirectionOrdinal < 0)
-                missileDirectionOrdinal += 4;
-            else if (missileDirectionOrdinal > 3)
-                missileDirectionOrdinal -= 4;
-        }
-
-        Direction missileDirection = Direction.values()[missileDirectionOrdinal];
-
+        Direction missileDirection = unit.getSkillDirection();
         skillMissileManager.add(new ManaBlockMissile(unit, new Location(x, y), missileDirection));
 
         endEffect();

@@ -12,9 +12,8 @@ public class ManaBurstMissile extends SkillMissile {
     private final FootMarkSpawner footMarkSpawner;
 
     public ManaBurstMissile(Unit user, Location location, Direction direction) {
-        super(user, location, direction, 900, 1200);
+        super(user, location, direction, 900, 1200, new Color(150, 192, 206));
 
-        Color color = new Color(150, 192, 206);
         footMarkSpawner = new FootMarkSpawner(this, color, 80, 40, 100, 1200, 0);
     }
 
@@ -27,16 +26,16 @@ public class ManaBurstMissile extends SkillMissile {
     @Override
     public void render(Graphics graphics, Location screenLocation) {
         footMarkSpawner.render(graphics, screenLocation);
-
-        Color color = new Color(150, 192, 206);
-
-        graphics.setColor(color);
-        graphics.fillRect((int) (screenLocation.getX() + location.getX()), (int) (screenLocation.getY() + location.getY()),
-                getSize(), getSize());
+        renderBody(graphics, screenLocation);
     }
 
     @Override
-    public int getSize() {
+    public int getWidth() {
+        return 60;
+    }
+
+    @Override
+    public int getHeight() {
         return 60;
     }
 }

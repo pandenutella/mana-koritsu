@@ -12,9 +12,8 @@ public class ManaChargingStabMissile extends SkillMissile {
     private final FootMarkSpawner footMarkSpawner;
 
     public ManaChargingStabMissile(Unit user, Location location, Direction direction) {
-        super(user, location, direction, 1200, 350);
+        super(user, location, direction, 1200, 350, new Color(206, 150, 150));
 
-        Color color = new Color(206, 150, 150);
         footMarkSpawner = new FootMarkSpawner(this, color, 40, 0, 20, 800, 10);
     }
 
@@ -27,16 +26,16 @@ public class ManaChargingStabMissile extends SkillMissile {
     @Override
     public void render(Graphics graphics, Location screenLocation) {
         footMarkSpawner.render(graphics, screenLocation);
-
-        Color color = new Color(206, 150, 150);
-
-        graphics.setColor(color);
-        graphics.fillRect((int) (screenLocation.getX() + location.getX()), (int) (screenLocation.getY() + location.getY()),
-                getSize(), getSize());
+        renderBody(graphics, screenLocation);
     }
 
     @Override
-    public int getSize() {
+    public int getWidth() {
+        return 40;
+    }
+
+    @Override
+    public int getHeight() {
         return 40;
     }
 }

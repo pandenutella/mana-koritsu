@@ -31,7 +31,7 @@ public class Unit implements Entity {
 
     private final int size = 50;
 
-    private Direction moveDirection;
+    private Direction direction;
     private Direction peekDirection;
     private boolean moving;
     private double moveSpeed = 300;
@@ -42,7 +42,7 @@ public class Unit implements Entity {
         this.location = location;
         this.skillMissileManager = skillMissileManager;
 
-        moveDirection = UP;
+        direction = UP;
 
         Map<Integer, Skill> swordSkillTierMap = new HashMap<>();
         swordSkillTierMap.put(1, new ManaChargingStabSkill(this, skillMissileManager));
@@ -80,7 +80,7 @@ public class Unit implements Entity {
         if (paused)
             return;
 
-        this.moveDirection = direction;
+        this.direction = direction;
         moving = true;
     }
 
@@ -115,7 +115,7 @@ public class Unit implements Entity {
         if (!paused && moving) {
             double distance = moveSpeed * (deltaTime / 1000);
 
-            location.adjustTowardsDirection(distance, moveDirection);
+            location.adjustTowardsDirection(distance, direction);
         }
 
         skillManager.update(deltaTime);
@@ -125,8 +125,11 @@ public class Unit implements Entity {
     public void render(Graphics graphics, Location screenLocation) {
         footMarkSpawner.render(graphics, screenLocation);
 
+        int x = (int) (screenLocation.getX() + location.getX());
+        int y = (int) (screenLocation.getY() + location.getY());
+
         graphics.setColor(WHITE);
-        graphics.fillRect((int) (screenLocation.getX() + location.getX()), (int) (screenLocation.getY() + location.getY()), size, size);
+        graphics.fillRect(x, y, size, size);
     }
 
     public String getName() {
@@ -140,7 +143,7 @@ public class Unit implements Entity {
 
     @Override
     public Direction getDirection() {
-        return moveDirection;
+        return direction;
     }
 
     @Override
@@ -149,7 +152,12 @@ public class Unit implements Entity {
     }
 
     @Override
-    public int getSize() {
+    public int getWidth() {
+        return size;
+    }
+
+    @Override
+    public int getHeight() {
         return size;
     }
 
@@ -159,5 +167,28 @@ public class Unit implements Entity {
 
     public SkillManager getSkillManager() {
         return skillManager;
+    }
+
+    public Direction getSkillDirection() {
+        int missileDirectionOrdinal = direction.ordinal();
+        if (peekDirection != null) {
+            switch (peekDirection) {
+                case LEFT:
+                    missileDirectionOrdinal--;
+                    break;
+                case RIGHT:
+                    missileDirectionOrdinal++;
+                    break;
+                default:
+                    break;
+            }
+
+            if (missileDirectionOrdinal < 0)
+                missileDirectionOrdinal += 4;
+            else if (missileDirectionOrdinal > 3)
+                missileDirectionOrdinal -= 4;
+        }
+
+        return Direction.values()[missileDirectionOrdinal];
     }
 }

@@ -5,6 +5,8 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.unit.Unit;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 public abstract class SkillMissile implements Entity {
@@ -13,16 +15,18 @@ public abstract class SkillMissile implements Entity {
     protected final Direction direction;
     protected final double moveSpeed;
     protected final double maxRange;
+    protected final Color color;
 
     protected double distanceTravelled;
     protected boolean expired = false;
 
-    public SkillMissile(Unit user, Location location, Direction direction, double moveSpeed, double maxRange) {
+    public SkillMissile(Unit user, Location location, Direction direction, double moveSpeed, double maxRange, Color color) {
         this.user = user;
         this.location = location;
         this.direction = direction;
         this.moveSpeed = moveSpeed;
         this.maxRange = maxRange;
+        this.color = color;
     }
 
     public abstract void update(double deltaTime);
@@ -38,6 +42,35 @@ public abstract class SkillMissile implements Entity {
     }
 
     public abstract void render(Graphics graphics, Location screenLocation);
+
+    protected void renderBody(Graphics graphics, Location screenLocation) {
+        int x = (int) (screenLocation.getX() + location.getX());
+        int y = (int) (screenLocation.getY() + location.getY());
+
+        Dimension dimension = getDerivedDimension();
+
+        graphics.setColor(color);
+        graphics.fillRect(x, y, dimension.width, dimension.height);
+    }
+
+    private Dimension getDerivedDimension() {
+        int definedWidth = getWidth();
+        int definedHeight = getHeight();
+
+        if (definedWidth == definedHeight)
+            return new Dimension(definedWidth, definedHeight);
+
+        switch (direction) {
+            case UP:
+            case DOWN:
+                return new Dimension(definedWidth, definedHeight);
+            case LEFT:
+            case RIGHT:
+                return new Dimension(definedHeight, definedWidth);
+            default:
+                return null;
+        }
+    }
 
     public boolean isExpired() {
         return expired;
