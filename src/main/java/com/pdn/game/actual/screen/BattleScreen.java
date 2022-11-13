@@ -78,21 +78,21 @@ public class BattleScreen implements Screen {
         Color shieldColor = new Color(165, 206, 150);
         SkillSet shieldSkillSet = player.getSkillManager().getSkillSetMap().get("skill-shield");
 
-        renderSkillSet(graphics, 1, swordColor, swordSkillSet.getTier(), swordSkillSet.getTierCurrent());
-        renderSkillSet(graphics, 2, sphereColor, sphereSkillSet.getTier(), sphereSkillSet.getTierCurrent());
-        renderSkillSet(graphics, 3, shieldColor, shieldSkillSet.getTier(), shieldSkillSet.getTierCurrent());
+        renderSkillSet(graphics, 1, swordColor, swordSkillSet);
+        renderSkillSet(graphics, 2, sphereColor, sphereSkillSet);
+        renderSkillSet(graphics, 3, shieldColor, shieldSkillSet);
 
         graphics.setColor(WHITE);
         graphics.drawString("Battle", 30, 30);
         graphics.drawString("Press [ESCAPE] to go back", 30, 45);
     }
 
-    private void renderSkillSet(Graphics graphics, int setCount, Color color, int tier, int tierCurrent) {
+    private void renderSkillSet(Graphics graphics, int setCount, Color color, SkillSet skillSet) {
         int pointWidth = 30;
         int pointHeight = 10;
 
         int gaugeWidth = pointWidth + 3;
-        int gaugeHeight = (pointHeight * tier) + (tier + 2);
+        int gaugeHeight = (pointHeight * skillSet.getTier()) + (skillSet.getTier() + 2);
 
         int gaugeX = 10 + (gaugeWidth * (setCount - 1)) + (3 * (setCount - 1));
         int gaugeY = SCREEN_HEIGHT - 10 - gaugeHeight;
@@ -100,7 +100,19 @@ public class BattleScreen implements Screen {
         graphics.setColor(color);
         graphics.drawRect(gaugeX, gaugeY, gaugeWidth, gaugeHeight);
 
-        for (int i = 0; i < tierCurrent; i++)
+        if (skillSet.isReplenishing() || skillSet.isOnCoolDown())
+            graphics.setColor(new Color(255, 255, 255));
+
+        if (skillSet.isReplenishing()) {
+            int replenishMaxHeight = gaugeHeight - 3;
+            int replenishHeight = (int) (replenishMaxHeight * (skillSet.getReplenishCurrent() / skillSet.getReplenish()));
+
+            graphics.fillRect(gaugeX + 2, SCREEN_HEIGHT - 10 - 1 - replenishHeight, pointWidth, replenishHeight);
+
+            return;
+        }
+
+        for (int i = 0; i < skillSet.getTierCurrent(); i++)
             graphics.fillRect(gaugeX + 2, SCREEN_HEIGHT - 10 - ((pointHeight + 1) * (i + 1)), pointWidth, pointHeight);
     }
 }
