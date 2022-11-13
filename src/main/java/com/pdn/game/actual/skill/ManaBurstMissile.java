@@ -14,7 +14,7 @@ public class ManaBurstMissile extends SkillMissile {
     public ManaBurstMissile(Unit user, Location location, Direction direction) {
         super(user, location, direction, 900, 1200, new Color(150, 192, 206));
 
-        footMarkSpawner = new FootMarkSpawner(this, color, 80, 40, 100, 1200, 0);
+        footMarkSpawner = new FootMarkSpawner(this, color, 50, 25, 50, 1200, 10);
     }
 
     @Override
@@ -31,11 +31,11 @@ public class ManaBurstMissile extends SkillMissile {
 
     @Override
     public int getWidth(Direction direction) {
-        return 60;
+        return 50;
     }
 
     @Override
     public int getHeight(Direction direction) {
-        return 60;
+        return 50;
     }
 }
