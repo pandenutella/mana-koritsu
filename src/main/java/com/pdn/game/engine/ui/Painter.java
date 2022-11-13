@@ -2,12 +2,17 @@ package com.pdn.game.engine.ui;
 
 import com.pdn.game.engine.Game;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.net.URL;
 
 import static java.awt.Color.BLACK;
+import static java.awt.Font.TRUETYPE_FONT;
+import static java.awt.Font.createFont;
 
 @Getter
 public class Painter {
@@ -20,9 +25,18 @@ public class Painter {
         component = new PainterPanel(game);
     }
 
-    @RequiredArgsConstructor
     private static class PainterPanel extends JPanel {
         private final Game game;
+
+        @SneakyThrows
+        public PainterPanel(Game game) {
+            this.game = game;
+
+            GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            URL fontFile = getClass().getClassLoader().getResource("SCRUBLAND.ttf");
+
+            graphicsEnvironment.registerFont(createFont(TRUETYPE_FONT, new File(fontFile.toURI())));
+        }
 
         @Override
         protected void paintComponent(Graphics g) {

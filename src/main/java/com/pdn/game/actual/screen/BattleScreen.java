@@ -13,6 +13,7 @@ import com.pdn.game.engine.ui.Painter;
 import com.pdn.game.engine.ui.Screen;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import static com.pdn.game.actual.effect.FootMarkManager.initialize;
 import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
 import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
 import static java.awt.Color.WHITE;
+import static java.awt.Font.PLAIN;
 
 public class BattleScreen implements Screen {
 
@@ -89,9 +91,13 @@ public class BattleScreen implements Screen {
         renderSkillSet(graphics, 2, sphereColor, sphereSkillSet);
         renderSkillSet(graphics, 3, shieldColor, shieldSkillSet);
 
+        Font oldFont = graphics.getFont();
+
         graphics.setColor(WHITE);
-        graphics.drawString("Battle", 30, 30);
-        graphics.drawString("Press [ESCAPE] to go back", 30, 45);
+        graphics.setFont(new Font("SCRUBLAND", PLAIN, 36));
+        graphics.drawString("[esc]", 30, 60);
+
+        graphics.setFont(oldFont);
     }
 
     private void renderSkillSet(Graphics graphics, int setCount, Color color, SkillSet skillSet) {
