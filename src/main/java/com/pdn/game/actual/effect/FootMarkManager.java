@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -34,9 +33,8 @@ public class FootMarkManager {
     }
 
     public void render(Graphics graphics, Location screenLocation) {
-        try {
-            footMarkList.forEach(footMark -> footMark.render(graphics, screenLocation));
-        } catch (ConcurrentModificationException ignored) {
-        }
+        List<FootMark> clonedFootMarkList = new ArrayList<>(footMarkList);
+
+        clonedFootMarkList.forEach(footMark -> footMark.render(graphics, screenLocation));
     }
 }

@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -34,9 +33,8 @@ public class SkillMissileManager {
     }
 
     public void render(Graphics graphics, Location screenLocation) {
-        try {
-            skillMissileList.forEach(skillMissile -> skillMissile.render(graphics, screenLocation));
-        } catch (ConcurrentModificationException ignored) {
-        }
+        List<SkillMissile> clonedSkillMissile = new ArrayList<>(skillMissileList);
+
+        clonedSkillMissile.forEach(skillMissile -> skillMissile.render(graphics, screenLocation));
     }
 }
