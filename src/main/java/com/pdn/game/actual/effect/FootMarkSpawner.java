@@ -43,20 +43,20 @@ public class FootMarkSpawner {
 
             switch (entity.getDirection()) {
                 case UP:
-                    markY = (int) entity.getLocation().getY() + (entity.getWidth() / 2) - (size / 2);
-                    markX = (int) entity.getLocation().getX() + (leftFoot ? offset : entity.getWidth() - size - offset);
+                    markY = (int) entity.getLocation().getY() + (entity.getHeight(entity.getDirection()) / 2) - (size / 2);
+                    markX = (int) entity.getLocation().getX() + (leftFoot ? offset : entity.getWidth(entity.getDirection()) - size - offset);
                     break;
                 case DOWN:
-                    markY = (int) entity.getLocation().getY() + (entity.getWidth() / 2) - (size / 2);
-                    markX = (int) entity.getLocation().getX() + (!leftFoot ? offset : entity.getWidth() - size - offset);
+                    markY = (int) entity.getLocation().getY() + (entity.getHeight(entity.getDirection()) / 2) - (size / 2);
+                    markX = (int) entity.getLocation().getX() + (!leftFoot ? offset : entity.getWidth(entity.getDirection()) - size - offset);
                     break;
                 case LEFT:
-                    markY = (int) entity.getLocation().getY() + (!leftFoot ? offset : entity.getWidth() - size - offset);
-                    markX = (int) entity.getLocation().getX() + (entity.getWidth() / 2) - (size / 2);
+                    markY = (int) entity.getLocation().getY() + (!leftFoot ? offset : entity.getHeight(entity.getDirection()) - size - offset);
+                    markX = (int) entity.getLocation().getX() + (entity.getWidth(entity.getDirection()) / 2) - (size / 2);
                     break;
                 case RIGHT:
-                    markY = (int) entity.getLocation().getY() + (leftFoot ? offset : entity.getWidth() - size - offset);
-                    markX = (int) entity.getLocation().getX() + (entity.getWidth() / 2) - (size / 2);
+                    markY = (int) entity.getLocation().getY() + (leftFoot ? offset : entity.getHeight(entity.getDirection()) - size - offset);
+                    markX = (int) entity.getLocation().getX() + (entity.getWidth(entity.getDirection()) / 2) - (size / 2);
                     break;
             }
 

@@ -6,7 +6,6 @@ import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.unit.Unit;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 
 public abstract class SkillMissile implements Entity {
@@ -47,29 +46,8 @@ public abstract class SkillMissile implements Entity {
         int x = (int) (screenLocation.getX() + location.getX());
         int y = (int) (screenLocation.getY() + location.getY());
 
-        Dimension dimension = getDerivedDimension();
-
         graphics.setColor(color);
-        graphics.fillRect(x, y, dimension.width, dimension.height);
-    }
-
-    private Dimension getDerivedDimension() {
-        int definedWidth = getWidth();
-        int definedHeight = getHeight();
-
-        if (definedWidth == definedHeight)
-            return new Dimension(definedWidth, definedHeight);
-
-        switch (direction) {
-            case UP:
-            case DOWN:
-                return new Dimension(definedWidth, definedHeight);
-            case LEFT:
-            case RIGHT:
-                return new Dimension(definedHeight, definedWidth);
-            default:
-                return null;
-        }
+        graphics.fillRect(x, y, getWidth(direction), getHeight(direction));
     }
 
     public boolean isExpired() {

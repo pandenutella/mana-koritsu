@@ -16,8 +16,8 @@ public class ManaBlastSkill extends Skill {
 
     @Override
     protected void startEffect() {
-        double x = unit.getLocation().getX() + (double) (unit.getWidth() / 2) - (double) (40 / 2);
-        double y = unit.getLocation().getY() + (double) (unit.getWidth() / 2) - (double) (40 / 2);
+        double x = unit.getLocation().getX() + (double) (unit.getWidth(unit.getDirection()) / 2) - (double) (40 / 2);
+        double y = unit.getLocation().getY() + (double) (unit.getHeight(unit.getDirection()) / 2) - (double) (40 / 2);
 
         Direction missileDirection = unit.getSkillDirection();
         skillMissileManager.add(new ManaBlastMissile(unit, new Location(x, y), missileDirection));

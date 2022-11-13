@@ -6,9 +6,9 @@ import com.pdn.game.actual.common.Location;
 public interface Entity {
     boolean isMoving();
 
-    int getWidth();
+    int getWidth(Direction direction);
 
-    int getHeight();
+    int getHeight(Direction direction);
 
     Direction getDirection();
 

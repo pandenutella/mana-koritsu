@@ -152,12 +152,12 @@ public class Unit implements Entity {
     }
 
     @Override
-    public int getWidth() {
+    public int getWidth(Direction direction) {
         return size;
     }
 
     @Override
-    public int getHeight() {
+    public int getHeight(Direction direction) {
         return size;
     }
 
