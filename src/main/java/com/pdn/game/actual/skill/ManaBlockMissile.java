@@ -12,9 +12,9 @@ public class ManaBlockMissile extends SkillMissile {
     private final FootMarkSpawner footMarkSpawner;
 
     public ManaBlockMissile(Unit user, Location location, Direction direction) {
-        super(user, location, direction, 300, 400, new Color(165, 206, 150));
+        super(user, location, direction, 300, 300, new Color(165, 206, 150));
 
-        footMarkSpawner = new FootMarkSpawner(this, color, 80, 20, 100, 200, 20);
+        footMarkSpawner = new FootMarkSpawner(this, color, 30, 20, 50, 300, 0);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ManaBlockMissile extends SkillMissile {
         switch (direction) {
             case UP:
             case DOWN:
-                return 75;
+                return 100;
             case LEFT:
             case RIGHT:
                 return 25;
@@ -51,7 +51,7 @@ public class ManaBlockMissile extends SkillMissile {
                 return 25;
             case LEFT:
             case RIGHT:
-                return 75;
+                return 100;
             default:
                 return 0;
         }

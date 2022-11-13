@@ -21,8 +21,8 @@ public class ManaBlockSkill extends Skill {
     protected void startEffect() {
         Direction missileDirection = unit.getSkillDirection();
 
-        int missileWidth = (unit.getSkillDirection() == UP || unit.getSkillDirection() == DOWN) ? 75 : 25;
-        int missileHeight = (unit.getSkillDirection() == UP || unit.getSkillDirection() == DOWN) ? 25 : 75;
+        int missileWidth = (unit.getSkillDirection() == UP || unit.getSkillDirection() == DOWN) ? 100 : 25;
+        int missileHeight = (unit.getSkillDirection() == UP || unit.getSkillDirection() == DOWN) ? 25 : 100;
 
         double x = unit.getLocation().getX() + (double) (unit.getWidth(missileDirection) / 2) - (double) (missileWidth / 2);
         double y = unit.getLocation().getY() + (double) (unit.getHeight(missileDirection) / 2) - (double) (missileHeight / 2);
