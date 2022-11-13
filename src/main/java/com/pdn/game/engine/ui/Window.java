@@ -12,7 +12,7 @@ public class Window {
     public Window(String title) {
         jFrame = new JFrame(title);
 
-        jFrame.setSize(1000, 700);
+        jFrame.setSize(1300, 900);
         jFrame.setResizable(false);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);

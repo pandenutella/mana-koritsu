@@ -11,6 +11,9 @@ import static java.awt.Color.BLACK;
 
 @Getter
 public class Painter {
+    public static int WIDTH = -1;
+    public static int HEIGHT = -1;
+
     private PainterPanel component;
 
     public void setGame(Game game) {
@@ -23,8 +26,13 @@ public class Painter {
 
         @Override
         protected void paintComponent(Graphics g) {
+            if (Painter.WIDTH == -1)
+                Painter.WIDTH = getWidth();
+            if (Painter.HEIGHT == -1)
+                Painter.HEIGHT = getHeight();
+
             g.setColor(BLACK);
-            g.fillRect(0, 0, getWidth(), getHeight());
+            g.fillRect(0, 0, Painter.WIDTH, Painter.HEIGHT);
 
             game.render(g);
         }

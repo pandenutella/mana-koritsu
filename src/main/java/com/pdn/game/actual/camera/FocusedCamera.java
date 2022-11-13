@@ -2,6 +2,7 @@ package com.pdn.game.actual.camera;
 
 import com.pdn.game.actual.Unit;
 import com.pdn.game.actual.common.Location;
+import com.pdn.game.engine.ui.Painter;
 
 public class FocusedCamera extends Camera {
 
@@ -15,8 +16,8 @@ public class FocusedCamera extends Camera {
 
     @Override
     public void update(double deltaTime) {
-        double targetX = -unit.getLocation().getX() + 500 - (double) (unit.getWidth(unit.getDirection()) / 2);
-        double targetY = -unit.getLocation().getY() + 350 - (double) (unit.getHeight(unit.getDirection()) / 2);
+        double targetX = -unit.getLocation().getX() + (double) (Painter.WIDTH / 2) - (double) (unit.getWidth(unit.getDirection()) / 2);
+        double targetY = -unit.getLocation().getY() + (double) (Painter.HEIGHT / 2) - (double) (unit.getHeight(unit.getDirection()) / 2);
 
         double diffX = targetX - screenLocation.getX();
         double diffY = targetY - screenLocation.getY();

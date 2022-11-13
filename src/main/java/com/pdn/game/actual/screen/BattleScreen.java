@@ -9,6 +9,7 @@ import com.pdn.game.actual.camera.FocusedCamera;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.controller.EnemyController;
 import com.pdn.game.actual.controller.PlayerController;
+import com.pdn.game.engine.ui.Painter;
 import com.pdn.game.engine.ui.Screen;
 
 import java.awt.Color;
@@ -32,8 +33,6 @@ public class BattleScreen implements Screen {
 
     private final List<Unit> unitList = new ArrayList<>();
     private final List<UnitController> unitControllerList = new ArrayList<>();
-
-    private static final int SCREEN_HEIGHT = 653;
 
     public BattleScreen() {
         player = new Unit("Mk", new Location(100, 325));
@@ -103,7 +102,7 @@ public class BattleScreen implements Screen {
         int gaugeHeight = (pointHeight * skillSet.getTier()) + (skillSet.getTier() + 2);
 
         int gaugeX = 10 + (gaugeWidth * (setCount - 1)) + (3 * (setCount - 1));
-        int gaugeY = SCREEN_HEIGHT - 10 - gaugeHeight;
+        int gaugeY = Painter.HEIGHT - 10 - gaugeHeight;
 
         graphics.setColor(color);
         graphics.drawRect(gaugeX, gaugeY, gaugeWidth, gaugeHeight);
@@ -115,12 +114,12 @@ public class BattleScreen implements Screen {
             int replenishMaxHeight = gaugeHeight - 3;
             int replenishHeight = (int) (replenishMaxHeight * (skillSet.getReplenishCurrent() / skillSet.getReplenish()));
 
-            graphics.fillRect(gaugeX + 2, SCREEN_HEIGHT - 10 - 1 - replenishHeight, pointWidth, replenishHeight);
+            graphics.fillRect(gaugeX + 2, Painter.HEIGHT - 10 - 1 - replenishHeight, pointWidth, replenishHeight);
 
             return;
         }
 
         for (int i = 0; i < skillSet.getTierCurrent(); i++)
-            graphics.fillRect(gaugeX + 2, SCREEN_HEIGHT - 10 - ((pointHeight + 1) * (i + 1)), pointWidth, pointHeight);
+            graphics.fillRect(gaugeX + 2, Painter.HEIGHT - 10 - ((pointHeight + 1) * (i + 1)), pointWidth, pointHeight);
     }
 }
