@@ -8,6 +8,7 @@ import com.pdn.game.actual.skill.ManaBlastSkill;
 import com.pdn.game.actual.skill.ManaBlockSkill;
 import com.pdn.game.actual.skill.ManaBurstSkill;
 import com.pdn.game.actual.skill.ManaChargingStabSkill;
+import com.pdn.game.actual.skill.ManaDualBlastSkill;
 import com.pdn.game.actual.skill.Skill;
 import com.pdn.game.actual.skill.SkillManager;
 import com.pdn.game.actual.skill.SkillMissileManager;
@@ -53,7 +54,7 @@ public class Unit implements Entity {
 
         Map<Integer, Skill> sphereSkillTierMap = new HashMap<>();
         sphereSkillTierMap.put(1, new ManaBurstSkill(this, skillMissileManager));
-        sphereSkillTierMap.put(2, new ManaBurstSkill(this, skillMissileManager));
+        sphereSkillTierMap.put(2, new ManaDualBlastSkill(this, skillMissileManager));
         sphereSkillTierMap.put(3, new ManaBlastSkill(this, skillMissileManager));
 
         SkillSet sphereSkillSet = new SkillSet(sphereSkillTierMap);

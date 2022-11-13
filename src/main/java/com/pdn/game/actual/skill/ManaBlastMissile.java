@@ -31,11 +31,11 @@ public class ManaBlastMissile extends SkillMissile {
 
     @Override
     public int getWidth(Direction direction) {
-        return 40;
+        return 25;
     }
 
     @Override
     public int getHeight(Direction direction) {
-        return 40;
+        return 25;
     }
 }
