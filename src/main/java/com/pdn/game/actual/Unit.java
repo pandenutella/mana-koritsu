@@ -14,12 +14,15 @@ import com.pdn.game.actual.effect.FootMarkSpawner;
 import lombok.Getter;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.pdn.game.actual.common.Direction.UP;
+import static com.pdn.game.engine.Game.PRIMARY_FONT_NAME;
 import static java.awt.Color.WHITE;
+import static java.awt.Font.PLAIN;
 
 public class Unit implements Entity {
     private final String name;
@@ -134,7 +137,16 @@ public class Unit implements Entity {
         int y = (int) (screenLocation.getY() + location.getY());
 
         graphics.setColor(WHITE);
+
         graphics.fillRect(x, y, size, size);
+
+        Font oldFont = graphics.getFont();
+        graphics.setFont(new Font(PRIMARY_FONT_NAME, PLAIN, 60));
+
+        int nameWidth = graphics.getFontMetrics().stringWidth(name);
+        graphics.drawString(name, x + (getWidth(direction) / 2) - (nameWidth / 2), y - 20);
+
+        graphics.setFont(oldFont);
     }
 
     public String getName() {

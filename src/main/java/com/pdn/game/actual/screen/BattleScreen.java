@@ -21,6 +21,7 @@ import java.util.List;
 import static com.pdn.game.actual.battle.SkillMissileManager.getGlobalSkillMissileManager;
 import static com.pdn.game.actual.effect.FootMarkManager.getGlobalFootMarkManager;
 import static com.pdn.game.actual.effect.FootMarkManager.initialize;
+import static com.pdn.game.engine.Game.PRIMARY_FONT_NAME;
 import static com.pdn.game.engine.key.KeyManager.getGlobalKeyManager;
 import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
 import static java.awt.Color.WHITE;
@@ -37,13 +38,13 @@ public class BattleScreen implements Screen {
     private final List<UnitController> unitControllerList = new ArrayList<>();
 
     public BattleScreen() {
-        player = new Unit("Mk", new Location(100, 325));
+        player = new Unit("Pan de Nutella", new Location(100, 325));
         unitList.add(player);
         unitControllerList.add(new PlayerController(player));
 
-        spawnEnemy(850, 325);
-        spawnEnemy(650, 325);
-        spawnEnemy(450, 325);
+        spawnEnemy("Enemy 1", new Location(850, 325));
+        spawnEnemy("Enemy 2", new Location(650, 325));
+        spawnEnemy("Enemy 3", new Location(450, 325));
 
         camera = new FocusedCamera(screenLocation, player);
 
@@ -51,8 +52,8 @@ public class BattleScreen implements Screen {
         initialize();
     }
 
-    private void spawnEnemy(int x, int y) {
-        Unit enemy = new Unit("", new Location(x, y));
+    private void spawnEnemy(String name, Location location) {
+        Unit enemy = new Unit(name, location);
         unitList.add(enemy);
         unitControllerList.add(new EnemyController(enemy));
     }
@@ -94,7 +95,7 @@ public class BattleScreen implements Screen {
         Font oldFont = graphics.getFont();
 
         graphics.setColor(WHITE);
-        graphics.setFont(new Font("Game Over", PLAIN, 72));
+        graphics.setFont(new Font(PRIMARY_FONT_NAME, PLAIN, 72));
         graphics.drawString("[ESC]", 30, 50);
 
         graphics.setFont(oldFont);

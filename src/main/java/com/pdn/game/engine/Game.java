@@ -9,6 +9,8 @@ import static com.pdn.game.engine.ui.ScreenManager.getGlobalScreenManager;
 
 @Setter
 public class Game {
+    public static final String PRIMARY_FONT_NAME = "Game Over";
+
     private Window window;
 
     public void start() {
