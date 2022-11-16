@@ -7,10 +7,8 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 
 import static com.pdn.game.actual.battle.SkillMissileManager.getGlobalSkillMissileManager;
-import static com.pdn.game.actual.common.Direction.DOWN;
-import static com.pdn.game.actual.common.Direction.LEFT;
-import static com.pdn.game.actual.common.Direction.RIGHT;
-import static com.pdn.game.actual.common.Direction.UP;
+import static com.pdn.game.actual.utility.DirectionUtility.getLeftOf;
+import static com.pdn.game.actual.utility.DirectionUtility.getRightOf;
 
 public class ManaDualBlastSkill extends Skill {
 
@@ -35,36 +33,6 @@ public class ManaDualBlastSkill extends Skill {
         getGlobalSkillMissileManager().add(new ManaBlastMissile(unit, rightMissileLocation, missileDirection));
 
         endEffect();
-    }
-
-    private Direction getLeftOf(Direction direction) {
-        switch (direction) {
-            case UP:
-                return LEFT;
-            case RIGHT:
-                return UP;
-            case DOWN:
-                return RIGHT;
-            case LEFT:
-                return DOWN;
-            default:
-                return null;
-        }
-    }
-
-    private Direction getRightOf(Direction direction) {
-        switch (direction) {
-            case UP:
-                return RIGHT;
-            case RIGHT:
-                return DOWN;
-            case DOWN:
-                return LEFT;
-            case LEFT:
-                return UP;
-            default:
-                return null;
-        }
     }
 
     @Override

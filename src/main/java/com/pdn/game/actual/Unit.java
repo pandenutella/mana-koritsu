@@ -6,6 +6,7 @@ import com.pdn.game.actual.battle.SkillSet;
 import com.pdn.game.actual.battle.skill.ManaBlastSkill;
 import com.pdn.game.actual.battle.skill.ManaBlockSkill;
 import com.pdn.game.actual.battle.skill.ManaBurstSkill;
+import com.pdn.game.actual.battle.skill.ManaChargingSlashSkill;
 import com.pdn.game.actual.battle.skill.ManaChargingStabSkill;
 import com.pdn.game.actual.battle.skill.ManaDualBlastSkill;
 import com.pdn.game.actual.common.Direction;
@@ -56,7 +57,7 @@ public class Unit implements Entity {
 
         Map<Integer, Skill> swordSkillTierMap = new HashMap<>();
         swordSkillTierMap.put(1, new ManaChargingStabSkill(this));
-        swordSkillTierMap.put(2, new ManaChargingStabSkill(this));
+        swordSkillTierMap.put(2, new ManaChargingSlashSkill(this));
         swordSkillTierMap.put(3, new ManaChargingStabSkill(this));
 
         SkillSet swordSkillSet = new SkillSet(swordSkillTierMap);

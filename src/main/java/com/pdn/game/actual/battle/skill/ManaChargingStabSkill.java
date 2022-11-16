@@ -24,7 +24,11 @@ public class ManaChargingStabSkill extends Skill {
         double y = unit.getLocation().getY() + (double) (unit.getHeight(unit.getDirection()) / 2) - (double) (40 / 2);
 
         missileDirection = unit.getSkillDirection();
-        getGlobalSkillMissileManager().add(new ManaChargingStabMissile(unit, new Location(x, y), missileDirection));
+
+        Location location = new Location(x, y);
+        location.adjustTowardsDirection(40, missileDirection);
+
+        getGlobalSkillMissileManager().add(new ManaChargingStabMissile(unit, location, missileDirection));
     }
 
     private double effectCounter = 0;
