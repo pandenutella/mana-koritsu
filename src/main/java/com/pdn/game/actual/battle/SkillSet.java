@@ -7,10 +7,8 @@ import java.util.Map;
 public class SkillSet {
     private final Map<Integer, Skill> skillTierMap;
 
-    private final double coolDown = 500;
-
     @Getter
-    private final double replenish = 5000;
+    private final double replenish;
 
     @Getter
     private final int tier;
@@ -33,6 +31,8 @@ public class SkillSet {
 
         tier = skillTierMap.size();
         tierCurrent = tier;
+
+        replenish = skillTierMap.size() * 2000;
     }
 
     public void useSkill() {
@@ -53,6 +53,7 @@ public class SkillSet {
         if (onCoolDown) {
             coolDownCurrent += deltaTime;
 
+            double coolDown = 500;
             if (coolDownCurrent >= coolDown) {
                 coolDownCurrent = 0;
                 onCoolDown = false;
