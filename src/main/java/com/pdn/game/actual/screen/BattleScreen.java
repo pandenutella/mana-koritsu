@@ -2,6 +2,7 @@ package com.pdn.game.actual.screen;
 
 import com.pdn.game.actual.Unit;
 import com.pdn.game.actual.UnitController;
+import com.pdn.game.actual.battle.SkillEffectManager;
 import com.pdn.game.actual.battle.SkillMissileManager;
 import com.pdn.game.actual.battle.SkillSet;
 import com.pdn.game.actual.camera.Camera;
@@ -18,6 +19,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pdn.game.actual.battle.SkillEffectManager.getGlobalSkillEffectManager;
 import static com.pdn.game.actual.battle.SkillMissileManager.getGlobalSkillMissileManager;
 import static com.pdn.game.actual.effect.FootMarkManager.getGlobalFootMarkManager;
 import static com.pdn.game.actual.effect.FootMarkManager.initialize;
@@ -49,6 +51,7 @@ public class BattleScreen implements Screen {
         camera = new FocusedCamera(screenLocation, player);
 
         SkillMissileManager.initialize();
+        SkillEffectManager.initialize();
         initialize();
     }
 
@@ -67,6 +70,7 @@ public class BattleScreen implements Screen {
         unitList.forEach(unit -> unit.update(deltaTime));
 
         getGlobalSkillMissileManager().update(deltaTime);
+        getGlobalSkillEffectManager().update(deltaTime);
         getGlobalFootMarkManager().update(deltaTime);
 
         camera.update(deltaTime);
@@ -76,8 +80,9 @@ public class BattleScreen implements Screen {
     public void render(Graphics graphics) {
         unitList.forEach(unit -> unit.render(graphics, screenLocation));
 
-        getGlobalSkillMissileManager().render(graphics, screenLocation);
         getGlobalFootMarkManager().render(graphics, screenLocation);
+        getGlobalSkillMissileManager().render(graphics, screenLocation);
+        getGlobalSkillEffectManager().render(graphics, screenLocation);
 
         Color swordColor = new Color(206, 150, 150);
         SkillSet swordSkillSet = player.getSkillManager().getSkillSetMap().get("skill-sword");

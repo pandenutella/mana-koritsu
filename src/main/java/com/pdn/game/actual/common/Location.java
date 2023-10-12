@@ -1,12 +1,16 @@
 package com.pdn.game.actual.common;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class Location {
 
+
+    @Setter
     @Getter
     private double x;
 
+    @Setter
     @Getter
     private double y;
 
@@ -38,5 +42,13 @@ public class Location {
 
     public void adjustY(double y) {
         this.y += y;
+    }
+
+    public double getXDifference(Location location) {
+        return x - location.x;
+    }
+
+    public double getYDifference(Location location) {
+        return y - location.y;
     }
 }

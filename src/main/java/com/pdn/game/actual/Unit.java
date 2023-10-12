@@ -9,6 +9,7 @@ import com.pdn.game.actual.battle.skill.ManaBurstSkill;
 import com.pdn.game.actual.battle.skill.ManaChargingSlashSkill;
 import com.pdn.game.actual.battle.skill.ManaChargingStabSkill;
 import com.pdn.game.actual.battle.skill.ManaDualBlastSkill;
+import com.pdn.game.actual.battle.skill.ManaShieldSkill;
 import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
@@ -70,9 +71,9 @@ public class Unit implements Entity {
         SkillSet sphereSkillSet = new SkillSet(sphereSkillTierMap);
 
         Map<Integer, Skill> shieldSkillTierMap = new HashMap<>();
-        shieldSkillTierMap.put(1, new ManaBlockSkill(this));
+        shieldSkillTierMap.put(1, new ManaShieldSkill(this));
         shieldSkillTierMap.put(2, new ManaBlockSkill(this));
-        shieldSkillTierMap.put(3, new ManaBlockSkill(this));
+        shieldSkillTierMap.put(3, new ManaShieldSkill(this));
 
         SkillSet shieldSkillSet = new SkillSet(shieldSkillTierMap);
 
