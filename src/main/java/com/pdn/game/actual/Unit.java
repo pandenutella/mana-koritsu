@@ -4,7 +4,6 @@ import com.pdn.game.actual.battle.Skill;
 import com.pdn.game.actual.battle.SkillManager;
 import com.pdn.game.actual.battle.SkillSet;
 import com.pdn.game.actual.battle.skill.ManaBlastSkill;
-import com.pdn.game.actual.battle.skill.ManaBlockSkill;
 import com.pdn.game.actual.battle.skill.ManaBurstSkill;
 import com.pdn.game.actual.battle.skill.ManaChargingSlashSkill;
 import com.pdn.game.actual.battle.skill.ManaChargingStabSkill;
@@ -50,7 +49,7 @@ public class Unit implements Entity {
     @Getter
     private boolean moving;
 
-    private double moveSpeed = 300;
+    private double moveSpeed = 250;
     private boolean paused = false;
 
     public Unit(String name, Location location, Color manaColor) {
@@ -61,8 +60,8 @@ public class Unit implements Entity {
         direction = UP;
 
         Map<Integer, Skill> swordSkillTierMap = new HashMap<>();
-        swordSkillTierMap.put(1, new ManaChargingStabSkill(this));
-        swordSkillTierMap.put(2, new ManaChargingSlashSkill(this));
+        swordSkillTierMap.put(1, new ManaChargingSlashSkill(this));
+        swordSkillTierMap.put(2, new ManaChargingStabSkill(this));
         swordSkillTierMap.put(3, new ManaChargingStabSkill(this));
 
         SkillSet swordSkillSet = new SkillSet(swordSkillTierMap);
@@ -71,13 +70,13 @@ public class Unit implements Entity {
         sphereSkillTierMap.put(1, new ManaBurstSkill(this));
         sphereSkillTierMap.put(2, new ManaDualBlastSkill(this));
         sphereSkillTierMap.put(3, new ManaBlastSkill(this));
+        sphereSkillTierMap.put(4, new ManaBlastSkill(this));
 
         SkillSet sphereSkillSet = new SkillSet(sphereSkillTierMap);
 
         Map<Integer, Skill> shieldSkillTierMap = new HashMap<>();
         shieldSkillTierMap.put(1, new ManaShieldSkill(this));
-        shieldSkillTierMap.put(2, new ManaBlockSkill(this));
-        shieldSkillTierMap.put(3, new ManaShieldSkill(this));
+        shieldSkillTierMap.put(2, new ManaShieldSkill(this));
 
         SkillSet shieldSkillSet = new SkillSet(shieldSkillTierMap);
 
