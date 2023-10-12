@@ -7,7 +7,6 @@ import com.pdn.game.actual.common.EffectCleanup;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class ManaShieldEffect extends SkillEffect {
@@ -15,7 +14,7 @@ public class ManaShieldEffect extends SkillEffect {
     private final FootMarkSpawner footMarkSpawner;
 
     public ManaShieldEffect(Unit user, Location location, Direction direction, EffectCleanup effectCleanup) {
-        super(user, location, direction, effectCleanup, 1, new Color(165, 206, 150));
+        super(user, location, direction, effectCleanup, 1, user.getManaColor());
 
         footMarkSpawner = new FootMarkSpawner(this, color, 30, 20, 50, 300, 0);
     }

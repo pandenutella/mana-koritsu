@@ -40,13 +40,12 @@ public class BattleScreen implements Screen {
     private final List<UnitController> unitControllerList = new ArrayList<>();
 
     public BattleScreen() {
-        player = new Unit("Pan de Nutella", new Location(100, 325));
+        player = new Unit("Pan de Nutella", new Location(100, 325), new Color(150, 192, 206));
         unitList.add(player);
         unitControllerList.add(new PlayerController(player));
 
-        spawnEnemy("Enemy 1", new Location(850, 325));
-        spawnEnemy("Enemy 2", new Location(650, 325));
-        spawnEnemy("Enemy 3", new Location(450, 325));
+        spawnEnemy("Enemy 1", new Location(850, 325), new Color(206, 150, 150));
+        spawnEnemy("Enemy 2", new Location(650, 325), new Color(165, 206, 150));
 
         camera = new FocusedCamera(screenLocation, player);
 
@@ -55,8 +54,8 @@ public class BattleScreen implements Screen {
         initialize();
     }
 
-    private void spawnEnemy(String name, Location location) {
-        Unit enemy = new Unit(name, location);
+    private void spawnEnemy(String name, Location location, Color manaColor) {
+        Unit enemy = new Unit(name, location, manaColor);
         unitList.add(enemy);
         unitControllerList.add(new EnemyController(enemy));
     }

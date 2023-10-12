@@ -6,14 +6,13 @@ import com.pdn.game.actual.common.Direction;
 import com.pdn.game.actual.common.Location;
 import com.pdn.game.actual.effect.FootMarkSpawner;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class ManaBlastMissile extends SkillMissile {
     private final FootMarkSpawner footMarkSpawner;
 
     public ManaBlastMissile(Unit user, Location location, Direction direction) {
-        super(user, location, direction, 600, 900, new Color(150, 192, 206));
+        super(user, location, direction, 600, 900, user.getManaColor());
 
         footMarkSpawner = new FootMarkSpawner(this, color, 30, 0, 45, 900, 0);
     }

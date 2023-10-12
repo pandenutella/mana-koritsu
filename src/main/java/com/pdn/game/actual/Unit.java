@@ -33,6 +33,9 @@ public class Unit implements Entity {
     private final Location location;
 
     @Getter
+    private final Color manaColor;
+
+    @Getter
     private final SkillManager skillManager;
 
     private final FootMarkSpawner footMarkSpawner;
@@ -50,9 +53,10 @@ public class Unit implements Entity {
     private double moveSpeed = 300;
     private boolean paused = false;
 
-    public Unit(String name, Location location) {
+    public Unit(String name, Location location, Color manaColor) {
         this.name = name;
         this.location = location;
+        this.manaColor = manaColor;
 
         direction = UP;
 
